@@ -6,9 +6,7 @@
 <aside class="lyear-layout-sidebar">
 
     <!-- logo -->
-    <div id="logo" class="sidebar-header">
-        <a href="${pageContext.request.contextPath}/index.jsp"><img src="${pageContext.request.contextPath}/assets/images/logo-sidebar.png" title="LightYear" alt="LightYear" /></a>
-    </div>
+
     <div class="lyear-layout-sidebar-scroll">
 
         <nav class="sidebar-main">
@@ -25,9 +23,7 @@
             </ul>
         </nav>
 
-        <div class="sidebar-footer">
-            <p class="copyright">Copyright &copy; 2019. <a target="_blank" href="http://lyear.itshubao.com">IT书包</a> All rights reserved.</p>
-        </div>
+
     </div>
 
 </aside>
@@ -51,7 +47,7 @@
             <ul class="topbar-right">
                 <li class="dropdown dropdown-profile">
                     <a href="javascript:void(0)" data-toggle="dropdown">
-                        <img class="img-avatar img-avatar-48 m-r-10" src="${pageContext.request.contextPath}/assets/images/users/avatar.jpg" alt="笔下光年" />
+                        <img class="img-avatar img-avatar-48 m-r-10" src="${pageContext.request.contextPath}/assets/images/users/avatar.jpg" />
                         <span>${sessionScope.role == 'admin'? sessionScope.user.username: sessionScope.user.name} <span class="caret"></span></span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-right">
