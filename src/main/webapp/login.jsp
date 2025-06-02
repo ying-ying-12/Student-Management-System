@@ -78,15 +78,7 @@
                     <input type="password" placeholder="请输入密码" class="form-control" id="password" name="password" />
                     <span class="mdi mdi-lock form-control-feedback" aria-hidden="true"></span>
                 </div>
-                <div class="form-group has-feedback feedback-left row">
-                    <div class="col-xs-7">
-                        <input type="text" name="captcha" id="captcha" class="form-control" placeholder="验证码">
-                        <span class="mdi mdi-check-all form-control-feedback" aria-hidden="true"></span>
-                    </div>
-                    <div class="col-xs-5">
-                        <img src="${pageContext.request.contextPath}/captcha" class="pull-right" style="cursor: pointer;" onclick="this.src=this.src+'?d='+Math.random();" title="点击刷新" alt="captcha">
-                    </div>
-                </div>
+
                 <div class="form-group" style="text-align: center">
                     <input type="radio" checked name="usertype" value="admin">管理员
                     <input type="radio" name="usertype" value="student">学生
@@ -96,7 +88,15 @@
                 </div>
             </form>
             <hr>
-
+            <div class="form-group has-feedback feedback-left row">
+                <div class="col-xs-7">
+                    <input type="text" name="captcha" id="captcha" class="form-control" placeholder="验证码">
+                    <span class="mdi mdi-check-all form-control-feedback" aria-hidden="true"></span>
+                </div>
+                <div class="col-xs-5">
+                    <img src="${pageContext.request.contextPath}/captcha" class="pull-right" style="cursor: pointer;" onclick="this.src=this.src+'?d='+Math.random();" title="点击刷新" alt="captcha">
+                </div>
+            </div>
         </div>
     </div>
 </div>
