@@ -1,4 +1,4 @@
-package com.example.demo7.Service;
+package com.example.demo7.service;
 
 
 import com.example.demo7.dao.AdminDao;
