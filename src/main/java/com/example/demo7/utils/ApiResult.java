@@ -17,33 +17,33 @@ public class ApiResult {
         String json = JSON.toJSONString(r);
         return json;
     }
-
+    // Getter和Setter方法，用于封装数据
     public static String json(Boolean success,String message){
         return json(success,message,null);
     }
 
 
     public Boolean getSuccess() {
-        return success;
+        return success; // 返回操作状态
     }
 
     public void setSuccess(Boolean success) {
-        this.success = success;
+        this.success = success; // 设置操作状态
     }
 
     public String getMessage() {
-        return message;
+        return message; // 返回提示消息
     }
 
     public void setMessage(String message) {
-        this.message = message;
+        this.message = message; // 设置提示消息
     }
 
     public Object getData() {
-        return data;
+        return data; // 返回响应数据
     }
 
     public void setData(Object data) {
-        this.data = data;
+        this.data = data; // 设置响应数据
     }
 }
