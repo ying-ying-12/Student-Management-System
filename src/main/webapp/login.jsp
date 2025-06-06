@@ -85,7 +85,12 @@
                         <span class="mdi mdi-check-all form-control-feedback" aria-hidden="true"></span>
                     </div>
                     <div class="col-xs-5">
-                        <img src="${pageContext.request.contextPath}/captcha" class="pull-right" style="cursor: pointer;" onclick="this.src=this.src+'?d='+Math.random();" title="点击刷新" alt="captcha">
+                        <img src="${pageContext.request.contextPath}/captcha"
+                             class="pull-right"
+                             style="cursor: pointer;"
+                             onclick="this.src=this.src+'?d='+Math.random();"
+                             title="点击刷新"
+                             alt="captcha">
                     </div>
                 </div>
 

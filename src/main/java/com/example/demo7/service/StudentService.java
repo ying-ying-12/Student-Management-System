@@ -1,15 +1,15 @@
 package com.example.demo7.service;
 
-
 import com.example.demo7.dao.StudentDao;
 import com.example.demo7.entity.Student;
 import com.example.demo7.utils.PagerVO;
 
 public class StudentService {
 
-    StudentDao dao = new StudentDao();
+    StudentDao dao = new StudentDao();// 创建数据访问对象实例，用于调用数据库操作方法
 
     public String insert(Student student){
+        // 验证信息是否为空
         if(student.getSno() == null || student.getSno().equals("")){
             return "学生学号不可为空";
         }if(student.getPassword() == null || student.getPassword().equals("")){
@@ -37,11 +37,13 @@ public class StudentService {
     }
 
     public Student getBySno(String sno){
+
         return dao.getBySno(sno);
     }
 
     public int count(){
-        return dao.count();
+
+        return dao.count();// 直接调用DAO层方法统计并返回总数
     }
 
     public PagerVO<Student> page(int current,int size,String sno,String name,String gender,String clazzno){
@@ -61,7 +63,6 @@ public class StudentService {
         }
         return dao.page(current,size,whereSql);
     }
-
     public int delete(String sno){
         return dao.delete(sno);
     }
