@@ -1,7 +1,5 @@
 package com.example.demo7.servlet;
 
-
-
 import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -48,16 +46,19 @@ public class CaptchaServlet extends HttpServlet {
         // 设置响应头通知浏览器以图片的形式打开
         resp.setContentType("image/jpeg");
         // 设置响应头控制浏览器不要缓存
-        resp.setDateHeader("expries", -1);
+        resp.setDateHeader("Expires", -1);
         resp.setHeader("Cache-Control", "no-cache");
         resp.setHeader("Pragma", "no-cache");
 
         // 将图片传给浏览器
-        ImageIO.write(bi, "jpg", resp.getOutputStream());
+        try {
+            ImageIO.write(bi, "jpg", resp.getOutputStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     // 设置图片背景色
-    // @param g
     private void setBackGround(Graphics g) {
         // 设置颜色
         g.setColor(Color.WHITE);
@@ -65,11 +66,7 @@ public class CaptchaServlet extends HttpServlet {
         g.fillRect(0, 0, WIDTH, HEIGHT);
     }
 
-    /*
-     * 设置图片的边框
-     * @param g
-     * */
-
+    // 设置图片的边框
     private void setBorder(Graphics g) {
         // 设置边框颜色
         g.setColor(Color.WHITE);
@@ -77,10 +74,7 @@ public class CaptchaServlet extends HttpServlet {
         g.drawRect(1, 1, WIDTH - 2, HEIGHT - 2);
     }
 
-    /*
-     * 在图片上画随机线条
-     * @param g
-     * */
+    // 在图片上画随机线条
     private void drawRandomLine(Graphics g) {
         // 设置颜色
         g.setColor(Color.GREEN);
@@ -94,12 +88,7 @@ public class CaptchaServlet extends HttpServlet {
         }
     }
 
-    /*
-     * 在图片上画随机字符
-     * @param g
-     * @param createTypeFlag
-     * @return String
-     * */
+    // 在图片上画随机字符
     private String drawRandomNum(Graphics g, String createTypeFlag) {
         // 设置颜色
         g.setColor(Color.RED);
@@ -126,13 +115,7 @@ public class CaptchaServlet extends HttpServlet {
         }
         return "";
     }
-
-    /*
-     * 创建随机字符
-     * @param g
-     * @param baseChar
-     * @return String
-     * */
+    // 创建随机字符
     private String createRandomChar(Graphics2D g, String baseChar) {
         StringBuffer b = new StringBuffer();
         int x = 5;
@@ -153,4 +136,3 @@ public class CaptchaServlet extends HttpServlet {
         return b.toString();
     }
 }
-
