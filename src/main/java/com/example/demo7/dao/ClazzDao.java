@@ -1,6 +1,5 @@
+//首页数据的查询
 package com.example.demo7.dao;
-
-
 
 import com.example.demo7.entity.Clazz;
 import com.example.demo7.utils.JdbcHelper;
@@ -82,6 +81,7 @@ public class ClazzDao {
     }
 
 
+//删除功能
 
     public int delete(String clazzno){
         JdbcHelper helper = new JdbcHelper();
@@ -99,17 +99,18 @@ public class ClazzDao {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }finally {
-            helper.closeDB();
+            helper.closeDB();//释放资源
         }
         return 0;
     }
 
     //班级学生数量统计
     public List<Clazz> statistics(){
+        //班级编号，班级名，班级人数
         String sql = "select c.clazzno,c.name, count(1) as stuCount \n" +
                 "from tb_clazz c, tb_student s\n" +
                 "where s.clazzno = c.clazzno\n" +
-                "GROUP BY c.clazzno,c.name order by count(1) desc";
+                "GROUP BY c.clazzno,c.name order by count(1) desc";//人数多的班级先显示
         JdbcHelper helper = new JdbcHelper();
         ResultSet resultSet = helper.executeQuery(sql);
         try {

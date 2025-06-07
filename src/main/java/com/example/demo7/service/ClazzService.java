@@ -1,3 +1,4 @@
+//首页数据的查询
 package com.example.demo7.service;
 
 
@@ -58,11 +59,13 @@ public class ClazzService {
 
 
     public String delete(String clazzno){
+        //查询班级里是否有学生
         int count = studentDao.count(" where clazzno = '" + clazzno + "'");
         if(count>0){
             return "删除失败，此班级已经有"+count + "人";
         }
         dao.delete(clazzno);
+        //没有人，删除成功
         return null;
     }
 

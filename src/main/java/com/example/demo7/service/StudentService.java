@@ -7,7 +7,7 @@ import com.example.demo7.utils.PagerVO;
 public class StudentService {
 
     StudentDao dao = new StudentDao();// 创建数据访问对象实例，用于调用数据库操作方法
-
+//新增
     public String insert(Student student){
         // 验证信息是否为空
         if(student.getSno() == null || student.getSno().equals("")){
@@ -27,7 +27,7 @@ public class StudentService {
         dao.insert(student);
         return null;
     }
-
+//更新
     public String update(Student student){
         if(student.getSno() == null || student.getSno().equals("")){
             return "被修改的学生学号不可为空";
