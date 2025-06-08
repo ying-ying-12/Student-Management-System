@@ -68,11 +68,11 @@ public class ClazzService {
         //没有人，删除成功
         return null;
     }
-
+//
     public Clazz getByClazzno(String clazzno) {
         return dao.getByClazzno(clazzno);
     }
-
+//查询所有班级方法
     public List<Clazz> listAll() {
         return dao.listAll();
     }

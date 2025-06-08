@@ -62,6 +62,7 @@ public class StudentServlet extends HttpServlet {
             if(!hasPermission){
                 return;
             }
+            //查询所有班级
             List<Clazz> clazzes = clazzService.listAll();
             req.setAttribute("clazzes",clazzes);
             req.getRequestDispatcher("/WEB-INF/views/student-add.jsp").forward(req,resp);
