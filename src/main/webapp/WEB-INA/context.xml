@@ -6,7 +6,7 @@
             maxTotal="4"
             maxIdle="2"
             driverClassName="com.mysql.cj.jdbc.Driver"
-            url="jdbc:mysql://127.0.0.1:3306/xi-tong?useSSL=false&amp;serverTimezone=UTC"
+            url="jdbc:mysql://127.0.0.1:3306/stu_manage?useSSL=false&amp;serverTimezone=UTC"
             username="root"
             password="123456"
             maxWaitMillis="5000"/>

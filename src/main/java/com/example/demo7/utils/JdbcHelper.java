@@ -10,9 +10,9 @@ import java.sql.*;
 public class JdbcHelper {
 
     private static final String className = "com.mysql.cj.jdbc.Driver";
-    private static final String url = "jdbc:mysql://123.207.79.43:3306/stu_manage?serverTimezone=GMT%2B8&characterEncoding=utf-8&allowPublicKeyRetrieval=true&useSSL=false";
-    private static final String user = "stu_manage";
-    private static final String pass = "stu_manage";// 自行修改密码
+    private static final String url = "jdbc:mysql://@localhost:stu_manage?serverTimezone=GMT%2B8&characterEncoding=utf-8&allowPublicKeyRetrieval=true&useSSL=false";
+    private static final String user = "root";
+    private static final String pass = "123456";// 自行修改密码
 
     public static void main(String[] args) throws SQLException {
         JdbcHelper helper = new JdbcHelper();

@@ -5,7 +5,7 @@
         <property name="driverClass">org.mariadb.jdbc.Driver</property>
         <!-- 数据库的url -->
         <!-- 在 xml 文件中，& 符号需要进行转义，使用 &amp; 来代替 & -->
-        <property name="jdbcUrl">jdbc:mariadb://localhost:3306/xi-tong?useUnicode=true&amp;characterEncoding=UTF-8</property>
+        <property name="jdbcUrl">jdbc:mariadb://localhost:3306/stu_manage?useUnicode=true&amp;characterEncoding=UTF-8</property>
         <property name="user">root</property>
         <property name="password">123456</property>
         <!--初始化连接数，取值应在minPoolSize与maxPoolSize之间 -->
