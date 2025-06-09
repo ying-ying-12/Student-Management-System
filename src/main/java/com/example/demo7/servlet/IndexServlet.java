@@ -6,12 +6,14 @@ import com.example.demo7.service.ClazzService;
 import com.example.demo7.service.StudentService;
 import com.example.demo7.utils.ApiResult;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,16 +27,26 @@ public class IndexServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("utf-8");
-        //返回数据
         resp.setContentType("application/json; charset=utf-8");
-        int clazzC = clazzService.count();
-        int stuC = studentService.count();
-        List<Clazz> clazzes = clazzService.statistics();
-        //封装数据
-        Map<String,Object> res = new HashMap<>();
-        res.put("clazzCount",clazzC);
-        res.put("studentCount",stuC);
-        res.put("clazzes",clazzes);
-        resp.getWriter().write(ApiResult.json(true,"成功",res));
+        
+        PrintWriter writer = resp.getWriter();
+        try {
+            int clazzC = clazzService.count();
+            int stuC = studentService.count();
+            List<Clazz> clazzes = clazzService.statistics();
+            
+            Map<String,Object> res = new HashMap<>();
+            res.put("clazzCount", clazzC);
+            res.put("studentCount", stuC);
+            res.put("clazzes", clazzes != null ? clazzes : new ArrayList<>());
+            
+            writer.write(ApiResult.json(true, "成功", res));
+        } catch (Exception e) {
+            e.printStackTrace();
+            writer.write(ApiResult.json(false, "获取数据失败: " + e.getMessage()));
+        } finally {
+            writer.flush();
+            writer.close();
+        }
     }
 }

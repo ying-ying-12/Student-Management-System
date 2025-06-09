@@ -107,10 +107,11 @@ public class ClazzDao {
     //班级学生数量统计
     public List<Clazz> statistics(){
         //班级编号，班级名，班级人数
-        String sql = "select c.clazzno,c.name, count(1) as stuCount \n" +
-                "from tb_clazz c, tb_student s\n" +
-                "where s.clazzno = c.clazzno\n" +
-                "GROUP BY c.clazzno,c.name order by count(1) desc";//人数多的班级先显示
+        String sql = "select c.clazzno, c.name, COUNT(s.sno) as stuCount \n" +
+                "from tb_clazz c \n" +
+                "LEFT JOIN tb_student s ON s.clazzno = c.clazzno \n" +
+                "GROUP BY c.clazzno, c.name \n" +
+                "ORDER BY stuCount DESC";
         JdbcHelper helper = new JdbcHelper();
         ResultSet resultSet = helper.executeQuery(sql);
         try {
@@ -119,7 +120,7 @@ public class ClazzDao {
                 Clazz clazz = new Clazz();
                 clazz.setClazzno(resultSet.getString("clazzno"));
                 clazz.setName(resultSet.getString("name"));
-                clazz.setStuCount(Integer.parseInt(resultSet.getString("stuCount")));
+                clazz.setStuCount(resultSet.getInt("stuCount"));
                 list.add(clazz);
             }
             return list;
@@ -128,7 +129,7 @@ public class ClazzDao {
         }finally {
             helper.closeDB();
         }
-        return null;
+        return new ArrayList<>(); // Return empty list instead of null
     }
 
     public List<Clazz> listAll() {

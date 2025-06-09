@@ -61,7 +61,7 @@
 </head>
 
 <body>
-<div class="row lyear-wrapper" style="background-image: url(${pageContext.request.contextPath}/assets/images/111.jpg); background-size: cover;">
+<div class="row lyear-wrapper" style="background-image: url(${pageContext.request.contextPath}/assets/images/login-bg.jpg); background-size: cover;">
     <div class="lyear-login">
         <div class="login-center">
             <div class="login-header text-center">
@@ -71,17 +71,17 @@
             </div>
             <form action="${pageContext.request.contextPath}/login" method="post">
                 <div class="form-group has-feedback feedback-left">
-                    <input type="text" placeholder="请输入您的用户名" class="form-control" name="username" id="username" />
+                    <input type="text" placeholder="请输入您的用户名" class="form-control" name="username" id="username" autocomplete="username" />
                     <span class="mdi mdi-account form-control-feedback" aria-hidden="true"></span>
                 </div>
                 <div class="form-group has-feedback feedback-left">
-                    <input type="password" placeholder="请输入密码" class="form-control" id="password" name="password" />
+                    <input type="password" placeholder="请输入密码" class="form-control" id="password" name="password" autocomplete="current-password" />
                     <span class="mdi mdi-lock form-control-feedback" aria-hidden="true"></span>
                 </div>
 
                 <div class="form-group has-feedback feedback-left row">
                     <div class="col-xs-7">
-                        <input type="text" name="captcha" id="captcha" class="form-control" placeholder="验证码">
+                        <input type="text" name="captcha" id="captcha" class="form-control" placeholder="验证码" autocomplete="off">
                         <span class="mdi mdi-check-all form-control-feedback" aria-hidden="true"></span>
                     </div>
                     <div class="col-xs-5">

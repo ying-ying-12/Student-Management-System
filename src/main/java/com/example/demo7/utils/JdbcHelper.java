@@ -1,6 +1,5 @@
 package com.example.demo7.utils;
 
-
 import java.sql.*;
 
 /**
@@ -8,97 +7,72 @@ import java.sql.*;
  * 2 提供最基本的和数据库交互的方法
  */
 public class JdbcHelper {
-
-    private static final String className = "com.mysql.cj.jdbc.Driver";
-    private static final String url = "jdbc:mysql://@localhost:stu_manage?serverTimezone=GMT%2B8&characterEncoding=utf-8&allowPublicKeyRetrieval=true&useSSL=false";
-    private static final String user = "root";
-    private static final String pass = "123456";// 自行修改密码
-
-    public static void main(String[] args) throws SQLException {
-        JdbcHelper helper = new JdbcHelper();
-        ResultSet resultSet = helper.executeQuery("select * from tb_student");
-        while (resultSet.next()){
-            System.out.println(resultSet.getString("sno"));
-            System.out.println(resultSet.getString("name"));
-            System.out.println(resultSet.getString("age"));
-        }
-        helper.closeDB();
-    }
-
-    static {
-        try {
-            Class.forName(className);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-
     private Connection conn = null;
     private PreparedStatement pstmt = null;
     private ResultSet rs = null;
 
-    public JdbcHelper(){
+    public JdbcHelper() {
         try {
-            conn = DriverManager.getConnection(url,user,pass);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            conn = DatabaseConnectionPool.getConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
-    public ResultSet executeQuery(String sql,Object... params){
+    public ResultSet executeQuery(String sql, Object... params) {
         try {
             pstmt = conn.prepareStatement(sql);
-            if(params!=null){
+            if (params != null) {
                 for (int i = 0; i < params.length; i++) {
-                    pstmt.setObject(i+1,params[i]);
+                    pstmt.setObject(i + 1, params[i]);
                 }
             }
             rs = pstmt.executeQuery();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return rs;
     }
 
-    public int excuteUpdate(String sql,Object ... params){
+    public int excuteUpdate(String sql, Object... params) {
         int row = -1;
         try {
             pstmt = conn.prepareStatement(sql);
-            if(params!=null){
+            if (params != null) {
                 for (int i = 0; i < params.length; i++) {
-                    pstmt.setObject(i+1,params[i]);
+                    pstmt.setObject(i + 1, params[i]);
                 }
             }
-            row = pstmt.executeUpdate();//sql执行以后影响的行数
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            row = pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return row;
     }
 
-    public void closeDB(){
-        if(rs!=null){
-            try {
+    public void closeDB() {
+        try {
+            if (rs != null) {
                 rs.close();
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
+                rs = null;
             }
-        }
-        if(pstmt != null){
-            try {
+            if (pstmt != null) {
                 pstmt.close();
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
+                pstmt = null;
             }
-        }
-        if(conn!=null){
-            try {
-                conn.close();
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
+            if (conn != null) {
+                conn.close(); // This will return the connection to the pool
+                conn = null;
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
+    @Override
+    protected void finalize() throws Throwable {
+        closeDB();
+        super.finalize();
+    }
 }
 

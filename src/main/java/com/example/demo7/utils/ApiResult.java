@@ -1,7 +1,7 @@
 package com.example.demo7.utils;
 
-
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 
 public class ApiResult {
 
@@ -14,7 +14,10 @@ public class ApiResult {
         r.setData(data);
         r.setMessage(message);
         r.setSuccess(success);
-        String json = JSON.toJSONString(r);
+        String json = JSON.toJSONString(r, 
+            SerializerFeature.DisableCircularReferenceDetect,
+            SerializerFeature.WriteMapNullValue,
+            SerializerFeature.WriteNullListAsEmpty);
         return json;
     }
     // Getter和Setter方法，用于封装数据
