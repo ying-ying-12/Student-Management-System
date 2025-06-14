@@ -36,7 +36,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>班级名</label>
-                                    <input class="form-control" type="text" value="${name}" name="name" placeholder="请输入班级名.">
+                                    <input class="form-control" type="text" value="${empty name ? '' : name}" name="name" placeholder="请输入班级名..">
                                 </div>
                                 <div class="form-group">
                                     <button class="btn btn-brown btn-round" type="submit">查询</button>
