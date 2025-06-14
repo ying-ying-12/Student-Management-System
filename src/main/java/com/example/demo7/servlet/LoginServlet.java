@@ -4,8 +4,10 @@ package com.example.demo7.servlet;
 
 import com.example.demo7.entity.Admin;
 import com.example.demo7.entity.Student;
+import com.example.demo7.entity.Teacher;
 import com.example.demo7.service.AdminService;
 import com.example.demo7.service.StudentService;
+import com.example.demo7.service.TeacherService;
 import com.example.demo7.utils.ApiResult;
 
 import jakarta.servlet.ServletException;
@@ -20,6 +22,7 @@ public class LoginServlet extends HttpServlet {
 
     AdminService adminService = new AdminService();
     StudentService studentService = new StudentService();
+    TeacherService teacherService = new TeacherService();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -37,22 +40,38 @@ public class LoginServlet extends HttpServlet {
         String password = req.getParameter("password");
         String usertype = req.getParameter("usertype");
         //判断角色
-        if("admin".equals(usertype)){
+        if("admin".equals(usertype)) {
             Admin admin = adminService.getByUsername(username);
-            if(admin == null){
-                resp.getWriter().print(ApiResult.json(false,"用户不存在"));
+                if (admin == null) {
+                    resp.getWriter().print(ApiResult.json(false, "用户不存在"));
+                    return;
+                }
+                if (admin.getPassword().equals(password)) {
+                    req.getSession().setAttribute("user", admin);
+                    req.getSession().setAttribute("role", "admin");
+                    resp.getWriter().print(ApiResult.json(true, "登录成功"));
+                    return;
+                } else {
+                resp.getWriter().print(ApiResult.json(false, "密码错误"));
                 return;
             }
-            if(admin.getPassword().equals(password)){
-                req.getSession().setAttribute("user",admin);
-                req.getSession().setAttribute("role","admin");
-                resp.getWriter().print(ApiResult.json(true,"登录成功"));
-                return;
-            }else {
-                resp.getWriter().print(ApiResult.json(false,"密码错误"));
+        } else if ("teacher".equals(usertype)) {
+            Teacher teacher= teacherService.getByTno(username);
+            if (teacher == null) {
+                resp.getWriter().print(ApiResult.json(false, "教师编号不存在"));
                 return;
             }
-        }else {
+            if (teacher.getPassword().equals(password)) {
+                req.getSession().setAttribute("user", teacher);
+                req.getSession().setAttribute("role", "teacher");
+                resp.getWriter().print(ApiResult.json(true, "登录成功"));
+                return;
+            } else {
+                resp.getWriter().print(ApiResult.json(false, "密码错误"));
+                return;
+            }
+
+    }else {
             Student student = studentService.getBySno(username);
             if(student == null){
                 resp.getWriter().print(ApiResult.json(false,"用户不存在"));

@@ -71,6 +71,9 @@
                                         <label >班级</label>
                                         <select class="form-control" name="clazzno" size="1">
                                             <option value="">请选择</option>
+                                          <%--  <option <c:if test="${entity.gender == 'm'}">selected</c:if> value="m">软件一班</option>
+                                            <option <c:if test="${entity.gender == 'w'}">selected</c:if> value="w">软件二班</option>--%>
+
                                             <c:forEach items="${clazzes}" var="i" varStatus="s">
                                             <option <c:if test="${entity.clazzno == i.clazzno}">selected</c:if> value="${i.clazzno}">${i.clazzno} / ${i.name}</option>
                                             </c:forEach>

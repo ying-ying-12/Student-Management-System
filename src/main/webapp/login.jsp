@@ -96,6 +96,7 @@
 
                 <div class="form-group" style="text-align: center">
                     <input type="radio" checked name="usertype" value="admin">管理员
+                    <input type="radio" checked name="usertype" value="teacher">教师
                     <input type="radio" name="usertype" value="student">学生
                 </div>
                 <div class="form-group">

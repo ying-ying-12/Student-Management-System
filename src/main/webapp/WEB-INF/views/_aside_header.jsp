@@ -19,7 +19,9 @@
                     <a href="javascript:void(0)"><i class="mdi mdi-format-align-justify"></i> 功能</a>
                     <ul class="nav nav-subnav">
                         <li> <a href="${pageContext.request.contextPath}/student">学生信息</a> </li>
+                        <li> <a href="${pageContext.request.contextPath}/teacher">教师管理</a> </li>
                         <li> <a href="${pageContext.request.contextPath}/clazz">班级信息</a> </li>
+
                     </ul>
                 </li>
 
@@ -50,7 +52,16 @@
                 <li class="dropdown dropdown-profile">
                     <a href="javascript:void(0)" data-toggle="dropdown">
                         <img class="img-avatar img-avatar-48 m-r-10" src="${pageContext.request.contextPath}/assets/images/users/avatar.jpg" alt="笔下光年" />
-                        <span>${sessionScope.role == 'admin'? sessionScope.user.username: sessionScope.user.name} <span class="caret"></span></span>
+                        <c:if test="${sessionScope.role == 'student'}">
+                            <span>${sessionScope.user.name} <span class="caret"></span></span>
+                        </c:if>
+                        <c:if test="${sessionScope.role == 'admin'}">
+                            <span>${sessionScope.user.username} <span class="caret"></span></span>
+                        </c:if>
+                        <c:if test="${sessionScope.role == 'teacher'}">
+                            <span>${sessionScope.user.tname} <span class="caret"></span></span>
+                        </c:if>
+
                     </a>
                     <ul class="dropdown-menu dropdown-menu-right">
                         <c:if test="${sessionScope.role == 'student'}">

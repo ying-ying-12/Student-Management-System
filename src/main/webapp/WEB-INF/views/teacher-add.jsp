@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
-    <title>新增学生</title>
+    <title>新增教师</title>
     <link rel="icon" href="${pageContext.request.contextPath}/assets/favicon.ico" type="image/ico">
     <link href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/assets/css/materialdesignicons.min.css" rel="stylesheet">
@@ -28,10 +28,10 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-body">
-                                <form id="myForm" action="${pageContext.request.contextPath}/student?r=add" method="post">
+                                <form id="myForm" action="${pageContext.request.contextPath}/teacher?r=add" method="post">
                                     <div class="form-group">
-                                        <label >学号</label>
-                                        <input required class="form-control" type="text" name="sno">
+                                        <label >教师编号</label>
+                                        <input required class="form-control" type="text" name="tno">
                                     </div>
                                     <div class="form-group">
                                         <label >密码</label>
@@ -39,41 +39,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label >姓名</label>
-                                        <input required class="form-control" type="text" name="name">
-                                    </div>
-                                    <div class="form-group">
-                                        <label >电话</label>
-                                        <input class="form-control" type="text" name="tele">
-                                    </div>
-                                    <div class="form-group">
-                                        <label >入学日期</label>
-                                        <input class="form-control js-datepicker m-b-10" type="text"
-                                               name="enterdate" placeholder="yyyy-mm-dd" value="" data-date-format="yyyy-mm-dd" />
-                                    </div>
-                                    <div class="form-group">
-                                        <label >年龄</label>
-                                        <input class="form-control" type="number" name="age">
-                                    </div>
-                                    <div class="form-group">
-                                        <label >性别</label>
-                                        <select class="form-control" name="gender" size="1">
-                                            <option value="">请选择</option>
-                                            <option value="m">男</option>
-                                            <option value="w">女</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label >详细地址</label>
-                                        <textarea class="form-control" name="address"></textarea>
-                                    </div>
-                                    <div class="form-group">
-                                        <label >班级</label>
-                                        <select class="form-control" name="clazzno" size="1">
-                                            <option value="">请选择</option>
-                                            <c:forEach items="${clazzes}" var="i" varStatus="s">
-                                            <option value="${i.clazzno}">${i.clazzno} / ${i.name}</option>
-                                            </c:forEach>
-                                        </select>
+                                        <input required class="form-control" type="text" name="tname">
                                     </div>
 
                                     <div class="form-group">
@@ -100,6 +66,7 @@
             event.preventDefault();
             lightyear.loading('show');
             var formData = $(this).serialize();
+            <%--提交之后发送ajax请求--%>
             $.ajax({
                 type:'post',
                 url:$(this).attr('action'),
@@ -107,7 +74,7 @@
                 success:function (response) {
                     if(response.success){
                         lightyear.loading('hide');
-                        lightyear.url('student');
+                        lightyear.url('teacher');
                         lightyear.notify(response.message, 'success', 500);
                     }else{
                         lightyear.loading('hide');

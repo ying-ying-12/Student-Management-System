@@ -64,7 +64,6 @@
                                 <tr>
                                     <th>#</th>
                                     <th>学号</th>
-                                    <th>密码</th>
                                     <th>姓名</th>
                                     <th>电话</th>
                                     <th>入学时间</th>
@@ -82,7 +81,6 @@
                                 <tr>
                                     <th scope="row">${s.count}</th>
                                     <td>${i.sno}</td>
-                                    <td>${i.password}</td>
                                     <td>${i.name}</td>
                                     <td>${i.tele}</td>
                                     <td><fmt:formatDate value="${i.enterdate}" pattern="yyyy年MM月dd日" /></td>
