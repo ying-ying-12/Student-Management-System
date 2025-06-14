@@ -33,11 +33,11 @@
                                 <input type="hidden" id="current" name="current" value="1">
                                 <div class="form-group">
                                     <label >学号</label>
-                                    <input class="form-control" type="text" value="${sno}" name="sno">
+                                    <input class="form-control" type="text" value="${sno}" name="sno" placeholder="请输入学号..">
                                 </div>
                                 <div class="form-group">
                                     <label>姓名</label>
-                                    <input class="form-control" type="text" value="${name}" name="name" placeholder="">
+                                    <input class="form-control" type="text" value="${empty name ? '' : name}" name="name" placeholder="请输入姓名..">
                                 </div>
                                 <div class="form-group">
                                     <label>性别</label>
@@ -49,7 +49,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>班级编号</label>
-                                    <input class="form-control" type="text" value="${clazzno}" name="clazzno" placeholder="">
+                                    <input class="form-control" type="text" value="${clazzno}" name="clazzno" placeholder="请输入班级编号..">
                                 </div>
                                 <div class="form-group">
                                     <button class="btn btn-brown btn-round" type="submit">查询</button>
