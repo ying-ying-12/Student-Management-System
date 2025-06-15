@@ -1,5 +1,6 @@
 package com.example.demo7.dao;
 
+import com.example.demo7.entity.Clazz;
 import com.example.demo7.entity.Teacher;
 import com.example.demo7.utils.JdbcHelper;
 import com.example.demo7.utils.PagerVO;
@@ -125,4 +126,25 @@ public class TeacherDao {
         return teacher;
     }
 
+    public List<Teacher> ListAll() {
+        JdbcHelper helper = new JdbcHelper();
+        ResultSet resultSet;
+        try {
+            resultSet = helper.executeQuery("select * from tb_teacher");
+            List<Teacher> list = new ArrayList<>();
+            while (resultSet.next()){
+                Teacher e = new Teacher();
+                e.setTno(resultSet.getString("tno"));
+                e.setTname(resultSet.getString("tname"));
+                e.setPassword(resultSet.getString("password"));
+                list.add(e);
+            }
+            return list;
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            helper.closeDB();
+        }
+        return null;
+    }
 }

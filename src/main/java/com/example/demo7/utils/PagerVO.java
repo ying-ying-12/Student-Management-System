@@ -1,5 +1,6 @@
 package com.example.demo7.utils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -9,7 +10,7 @@ public class PagerVO<T> {
     int current;
     int size;
     int total;
-    List<T> list;
+    private List<T> list=new ArrayList<>();
 
     int totalPages;
     boolean showLeft;
@@ -110,8 +111,7 @@ public class PagerVO<T> {
     }
 
     public void setList(List<T> list) {
-        this.list = list;
+        this.list = list!=null?list:new ArrayList<>();
     }
-//get set 函数略...
 }
 

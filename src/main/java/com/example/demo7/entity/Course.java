@@ -3,6 +3,8 @@ package com.example.demo7.entity;
 import java.util.Date;
 
 public class Course {
+
+    private Teacher teacher;
    private String cno;
    private String tno;
    private String cname;
@@ -12,6 +14,13 @@ public class Course {
    private Integer limi;
    private Integer count;
 
+    public Teacher getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
+    }
 
     public String getCno() {
         return cno;

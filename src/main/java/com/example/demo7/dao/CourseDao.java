@@ -144,7 +144,7 @@ public class CourseDao {
         course.setBegindate(resultSet.getDate("begindate"));
         course.setEnddate(resultSet.getDate("enddate"));
         course.setCredits(resultSet.getDouble("credits"));
-        course.setLimi(resultSet.getInt("lmi"));
+        course.setLimi(resultSet.getInt("limi"));
         course.setCount(resultSet.getInt("count"));
         return course;
     }

@@ -29,53 +29,34 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-body">
-                                <form id="myForm" action="${pageContext.request.contextPath}/student?r=edit" method="post">
+                                <form id="myForm" action="${pageContext.request.contextPath}/course?r=edit" method="post">
                                     <div class="form-group">
-                                        <label >学号</label>
-                                        <input readonly value="${entity.sno}" class="form-control" type="text" name="sno">
+                                        <%--课程编号不能改--%>
+                                        <label >课程编号</label>
+                                        <input  readonly value="${entity.cno}" required class="form-control" type="text" name="cno">
                                     </div>
                                     <div class="form-group">
-                                        <label >密码</label>
-                                        <input required value="${entity.password}" class="form-control" type="password" name="password">
+                                        <label >课程名</label>
+                                        <input required value="${entity.cname}" class="form-control" type="text" name="cname">
                                     </div>
                                     <div class="form-group">
-                                        <label >姓名</label>
-                                        <input required value="${entity.name}" class="form-control" type="text" name="name">
+                                        <label >选课开始时间</label>
+                                        <input value="${entity.begindate}" required class="form-control js-datepicker m-b-10" type="text"
+                                               name="begindate" placeholder="yyyy-mm-dd" value="" data-date-format="yyyy-mm-dd" />
                                     </div>
                                     <div class="form-group">
-                                        <label >电话</label>
-                                        <input class="form-control" value="${entity.tele}" type="text" name="tele">
+                                        <label >选课结束时间</label>
+                                        <input value="${entity.enddate}" required class="form-control js-datepicker m-b-10" type="text"
+                                               name="enddate" placeholder="yyyy-mm-dd" value="" data-date-format="yyyy-mm-dd" />
                                     </div>
                                     <div class="form-group">
-                                        <label >入学日期</label>
-                                        <input value="${entity.enterdate}" class="form-control js-datepicker m-b-10" type="text"
-                                               name="enterdate" placeholder="yyyy-mm-dd" data-date-format="yyyy-mm-dd" />
+                                        <label >学分</label>
+                                        <input value="${entity.credits}" class="form-control" type="number" name="credits">
                                     </div>
                                     <div class="form-group">
-                                        <label >年龄</label>
-                                        <input value="${entity.age}"  class="form-control" type="number" name="age">
-                                    </div>
-                                    <div class="form-group">
-                                        <label >性别</label>
-                                        <select class="form-control" name="gender" size="1">
-                                            <option value="">请选择</option>
-                                            <option <c:if test="${entity.gender == 'm'}">selected</c:if> value="m">男</option>
-                                            <option <c:if test="${entity.gender == 'w'}">selected</c:if> value="w">女</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label >详细地址</label>
-                                        <textarea class="form-control" name="address">${entity.address}</textarea>
-                                    </div>
-                                    <div class="form-group">
-                                        <label >班级</label>
-                                        <select class="form-control" name="clazzno" size="1">
-                                            <option value="">请选择</option>
-
-                                            <c:forEach items="${clazzes}" var="i" varStatus="s">
-                                            <option <c:if test="${entity.clazzno == i.clazzno}">selected</c:if> value="${i.clazzno}">${i.clazzno} / ${i.name}</option>
-                                            </c:forEach>
-                                        </select>
+                                        <%--限制人数不可编辑--%>
+                                        <label >限制人数</label>
+                                        <input value="${entity.limi}" required class="form-control" type="text" name="limi">
                                     </div>
 
                                     <div class="form-group">
@@ -109,7 +90,7 @@
                 success:function (response) {
                     if(response.success){
                         lightyear.loading('hide');
-                        lightyear.url('student');
+                        lightyear.url('course');
                         lightyear.notify(response.message, 'success', 500);
                     }else{
                         lightyear.loading('hide');

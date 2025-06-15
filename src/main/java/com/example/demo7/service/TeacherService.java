@@ -1,8 +1,11 @@
 package com.example.demo7.service;
 
 import com.example.demo7.dao.TeacherDao;
+import com.example.demo7.entity.Clazz;
 import com.example.demo7.entity.Teacher;
 import com.example.demo7.utils.PagerVO;
+
+import java.util.List;
 
 public class TeacherService {
 
@@ -58,5 +61,9 @@ public class TeacherService {
     }
     public int delete(String tno){
         return dao.delete(tno);
+    }
+
+    public List<Teacher> listAll() {
+        return dao.ListAll();
     }
 }

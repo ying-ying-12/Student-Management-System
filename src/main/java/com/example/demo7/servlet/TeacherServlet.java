@@ -96,7 +96,7 @@ public class TeacherServlet extends HttpServlet {
                     resp.getWriter().write(ApiResult.json(false,msg));
                     return;
                 }else{
-                    resp.getWriter().write(ApiResult.json(true,"更新学生成功！"));
+                    resp.getWriter().write(ApiResult.json(true,"更新教师成功！"));
                     return;
                 }
             }
