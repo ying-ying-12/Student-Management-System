@@ -16,18 +16,17 @@ public class StuCouDao {
         pagerVO.setCurrent(current);
         pagerVO.setSize(size);
         JdbcHelper helper = new JdbcHelper();
-        ResultSet resultSet = helper.executeQuery("select count(1) from tb_stucou " + whereSql);
+        ResultSet resultSet = helper.executeQuery("select count(1) from tb_stu_cou " + whereSql);
         try {
             resultSet.next();
             int total = resultSet.getInt(1);
             pagerVO.setTotal(total);
-            // select * from  tb_stucou where .. limit 10,10
-            resultSet = helper.executeQuery("select * from tb_stucou "
+            resultSet = helper.executeQuery("select * from tb_stu_cou "
                     + whereSql + "limit " + ((current-1)*size)+ ","+size);
             List<StuCou> list = new ArrayList<>();
             while (resultSet.next()){
-                StuCou stucou = toEntity(resultSet);
-                list.add(stucou);
+                StuCou stu_cou = toEntity(resultSet);
+                list.add(stu_cou);
             }
             pagerVO.setList(list);
             return pagerVO;
@@ -39,39 +38,34 @@ public class StuCouDao {
         return pagerVO;
     }
 
-    public int insert(StuCou stucou){
+    public int insert(StuCou stu_cou){
         JdbcHelper helper = new JdbcHelper();
-        int res = helper.excuteUpdate("insert into tb_stucou values(?,?,?,?,?,?,?,?,?)",
-                stucou.getCno(),stucou.getSno(),stucou.getChosetime(),
-                stucou.getScore(),stucou.getEvaluation());
+        int res = helper.excuteUpdate("insert into tb_stu_cou values(?,?,?,?,?)",
+                stu_cou.getCno(),stu_cou.getSno(),stu_cou.getChosetime(),
+                stu_cou.getScore(),stu_cou.getEvaluation());
         return res;
     }
 
-    /**
-     * StuCou 里面有属性为null的话，就忽视，不是null的话，就加入更新的sql语句，进行更新
-     * @param stucou
-     * @return
-     */
-    public int update(StuCou stucou){
+    public int update(StuCou stu_cou){
         JdbcHelper helper = new JdbcHelper();
         int res = 0;
-        String sql = "update tb_stucou set ";
+        String sql = "update tb_stu_cou set ";
         List<Object> params = new ArrayList<>();
         //根据课程号和学生号去更新
-        if(stucou.getChosetime()!=null){
+        if(stu_cou.getChosetime()!=null){
             sql += "chosetime = ?,";
-            params.add(stucou.getChosetime());
+            params.add(stu_cou.getChosetime());
         }
-        if(stucou.getScore()!=null){
+        if(stu_cou.getScore()!=null){
             sql += "score = ?,";
-            params.add(stucou.getScore());
+            params.add(stu_cou.getScore());
         }
-        if(stucou.getEvaluation()!=null){
+        if(stu_cou.getEvaluation()!=null){
             sql += "evaluation = ?,";
-            params.add(stucou.getEvaluation());
+            params.add(stu_cou.getEvaluation());
         }
         sql = sql.substring(0,sql.length() - 1);
-        sql += " where sno = '"+stucou.getSno() + "'and cno='"+stucou.getCno()+"'";
+        sql += " where sno = '"+stu_cou.getSno() + "'and cno='"+stu_cou.getCno()+"'";
         System.out.println(sql);
         res = helper.excuteUpdate(sql,params.toArray());
         helper.closeDB();
@@ -81,7 +75,7 @@ public class StuCouDao {
     //退选
     public int delete(String sno,String cno){
         JdbcHelper helper = new JdbcHelper();
-        int res = helper.excuteUpdate("delete from tb_stucou where sno = ? and cno =?",sno,cno);
+        int res = helper.excuteUpdate("delete from tb_stu_cou where sno = ? and cno =?",sno,cno);
         helper.closeDB();
         return res;
     }
@@ -91,7 +85,7 @@ public class StuCouDao {
             whereSql = "";
         }
         JdbcHelper helper = new JdbcHelper();
-        ResultSet resultSet = helper.executeQuery("select count(1) from tb_stucou" + whereSql);
+        ResultSet resultSet = helper.executeQuery("select count(1) from tb_stu_cou" + whereSql);
         try {
             resultSet.next();
             return resultSet.getInt(1);
@@ -109,7 +103,7 @@ public class StuCouDao {
 
     public StuCou getBySnoCno(String sno,String cno){
         JdbcHelper helper = new JdbcHelper();
-        ResultSet resultSet = helper.executeQuery("select * from tb_stucou where sno = ? and cno =?", sno,cno);
+        ResultSet resultSet = helper.executeQuery("select * from tb_stu_cou where sno = ? and cno =?", sno,cno);
         try {
             if(resultSet.next()){
                 return toEntity(resultSet);
@@ -123,13 +117,13 @@ public class StuCouDao {
     }
 
     public StuCou toEntity(ResultSet resultSet) throws SQLException {
-        StuCou stucou = new StuCou();
-        stucou.setSno(resultSet.getString("sno"));
-        stucou.setCno(resultSet.getString("cno"));
-        stucou.setChosetime(resultSet.getDate("chosetime("));
-        stucou.setScore(resultSet.getDouble("score"));
-        stucou.setEvaluation(resultSet.getString("evaluation"));
-        return stucou;
+        StuCou stu_cou = new StuCou();
+        stu_cou.setSno(resultSet.getString("sno"));
+        stu_cou.setCno(resultSet.getString("cno"));
+        stu_cou.setChosetime(resultSet.getDate("chosetime"));
+        stu_cou.setScore(resultSet.getDouble("score"));
+        stu_cou.setEvaluation(resultSet.getString("evaluation"));
+        return stu_cou;
     }
 
 }

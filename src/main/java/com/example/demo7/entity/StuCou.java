@@ -4,7 +4,9 @@ import java.util.Date;
 
 public class StuCou {
     private String cno;
+    private String cname;
     private String sno;
+    private String sname;
     private Date chosetime;
     private Double score;
     private String evaluation;
@@ -43,6 +45,22 @@ public class StuCou {
 
     public String getEvaluation() {
         return evaluation;
+    }
+
+    public String getCname() {
+        return cname;
+    }
+
+    public void setCname(String cname) {
+        this.cname = cname;
+    }
+
+    public String getSname() {
+        return sname;
+    }
+
+    public void setSname(String sname) {
+        this.sname = sname;
     }
 
     public void setEvaluation(String evaluation) {

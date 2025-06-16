@@ -16,6 +16,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -50,6 +51,7 @@ public class CourseServlet extends HttpServlet {
                 course.setTeacher(tmap.get(course.getTno()));
             }
 
+            req.setAttribute("now",new Date());
             req.setAttribute("teacheres",teacheres);
             req.setAttribute("cno",cno);
             req.setAttribute("tno",tno);
@@ -105,9 +107,6 @@ public class CourseServlet extends HttpServlet {
 
             String limi = req.getParameter("limi");
             course.setLimi(Integer.parseInt(limi));
-
-//            String count = req.getParameter("count");
-//            course.setCount(Integer.parseInt(count));
 
             if("add".equals(r)){
                 //添加课程时人数设为0

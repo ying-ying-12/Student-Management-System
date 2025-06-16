@@ -19,9 +19,10 @@
                     <a href="javascript:void(0)"><i class="mdi mdi-format-align-justify"></i> 功能</a>
                     <ul class="nav nav-subnav">
                         <li> <a href="${pageContext.request.contextPath}/student">学生信息</a> </li>
-                        <li> <a href="${pageContext.request.contextPath}/teacher">教师管理</a> </li>
+                        <li> <a href="${pageContext.request.contextPath}/teacher">教师信息</a> </li>
                         <li> <a href="${pageContext.request.contextPath}/clazz">班级信息</a> </li>
                         <li> <a href="${pageContext.request.contextPath}/course">课程信息</a> </li>
+                        <li> <a href="${pageContext.request.contextPath}/stucou">选课记录信息</a> </li>
 
                     </ul>
                 </li>
