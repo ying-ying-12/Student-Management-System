@@ -84,8 +84,8 @@
                                             <td>${i.cno}</td>
                                             <td>${i.tno}/${i.teacher.tname}</td>
                                             <td>${i.cname}</td>
-                                            <td><fmt:formatDate value="${i.begindate}" pattern="yyyy年MM月dd日" /></td>
-                                            <td><fmt:formatDate value="${i.enddate}" pattern="yyyy年MM月dd日" /></td>
+                                            <td><fmt:formatDate value="${i.begindate}" pattern="yyyy年MM月dd日 HH:mm:ss" /></td>
+                                            <td><fmt:formatDate value="${i.enddate}" pattern="yyyy年MM月dd日 HH:mm:ss" /></td>
                                             <td>${i.credits}</td>
                                             <td>${i.limi}</td>
                                             <td>${i.count}</td>
