@@ -29,15 +29,15 @@
                             <div class="card-body">
                                 <form id="myForm" action="${pageContext.request.contextPath}/clazz?r=add" method="post">
                                     <div class="form-group">
-                                        <label >班级编号</label>
-                                        <input class="form-control" type="text" name="clazzno" placeholder="请输入班级编号">
+                                        <label for="clazzno">班级编号</label>
+                                        <input class="form-control" type="text" name="clazzno" id="clazzno" placeholder="请输入班级编号" aria-label="班级编号" required>
                                     </div>
                                     <div class="form-group">
-                                        <label >班级名</label>
-                                        <input class="form-control" type="text" name="name" placeholder="请输入班级名">
+                                        <label for="name">班级名</label>
+                                        <input class="form-control" type="text" name="name" id="name" placeholder="请输入班级名" aria-label="班级名" required>
                                     </div>
                                     <div class="form-group">
-                                        <button class="btn btn-primary" type="submit">提交</button>
+                                        <button class="btn btn-primary" type="submit" aria-label="提交班级信息">提交</button>
                                     </div>
                                 </form>
 

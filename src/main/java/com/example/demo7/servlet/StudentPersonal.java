@@ -13,7 +13,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Objects;
-
+// 处理路径为/student-personal的 POST 请求
+//
+//个人信息修改：学生可修改除学号外的个人信息（姓名、密码、联系方式等）
+//密码修改：学生可修改登录密码，需验证原密码
+//权限控制：仅允许学生本人修改自己的信息，禁止越权操作
 @WebServlet("/student-personal")
 public class StudentPersonal extends HttpServlet {
 

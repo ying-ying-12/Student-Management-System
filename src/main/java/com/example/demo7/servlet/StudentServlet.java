@@ -17,7 +17,12 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
-
+//处理路径为/student的请求，主要实现：
+//
+//查询功能：支持分页查询学生信息，可按学号、姓名、性别、班级筛选
+//添加功能：管理员可添加新学生
+//编辑功能：管理员可修改学生信息
+//删除功能：管理员可删除学生记录
 @WebServlet("/student")
 public class StudentServlet extends HttpServlet {
     StudentService studentService = new StudentService();

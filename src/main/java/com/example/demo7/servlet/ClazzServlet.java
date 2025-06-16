@@ -41,7 +41,7 @@ public class ClazzServlet extends HttpServlet {
             req.getRequestDispatcher("/WEB-INF/views/clazz-list.jsp").forward(req,resp);
         }
 
-        //clazz-add.jsp放在WEB-INF里面所以不能直接访问
+
         //用后端的servlet
         if("add".equals(r)){
             boolean hasPermission = MyUtils.hasPermission(req,resp,false,"admin");

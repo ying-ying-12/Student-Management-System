@@ -3,7 +3,7 @@
 <html lang="zh">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>新增课程</title>
   <link rel="icon" href="${pageContext.request.contextPath}/assets/favicon.ico" type="image/ico">
   <link href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css" rel="stylesheet">
@@ -30,35 +30,34 @@
               <div class="card-body">
                 <form id="myForm" action="${pageContext.request.contextPath}/course?r=add" method="post">
                   <div class="form-group">
-                    <label >课程编号</label>
-                    <input required class="form-control" type="text" name="cno">
+                    <label for="cno">课程编号</label>
+                    <input required class="form-control" type="text" name="cno" id="cno" aria-label="课程编号" placeholder="请输入课程编号">
                   </div>
                   <div class="form-group">
-                    <label >课程名</label>
-                    <input required class="form-control" type="text" name="cname">
+                    <label for="cname">课程名</label>
+                    <input required class="form-control" type="text" name="cname" id="cname" aria-label="课程名" placeholder="请输入课程名">
                   </div>
                   <div class="form-group">
-                    <label >选课开始时间</label>
+                    <label for="begindate">选课开始时间</label>
                     <input required class="form-control js-datetimepicker" type="text"
-                           name="begindate" placeholder="请选择具体时间" data-side-by-side="true" data-locale="zh-cn" date-format="yyyy-MM-DD HH:mm:ss" />
-
+                           name="begindate" id="begindate" placeholder="请选择具体时间" data-side-by-side="true" data-locale="zh-cn" date-format="yyyy-MM-DD HH:mm:ss" aria-label="选课开始时间" />
                   </div>
                   <div class="form-group">
-                    <label >选课结束时间</label>
+                    <label for="enddate">选课结束时间</label>
                     <input required class="form-control js-datetimepicker" type="text"
-                           name="enddate" placeholder="请选择具体时间" data-side-by-side="true" data-locale="zh-cn" date-format="yyyy-MM-DD HH:mm:ss" />
+                           name="enddate" id="enddate" placeholder="请选择具体时间" data-side-by-side="true" data-locale="zh-cn" date-format="yyyy-MM-DD HH:mm:ss" aria-label="选课结束时间" />
                   </div>
                   <div class="form-group">
-                    <label >学分</label>
-                    <input class="form-control" type="number" name="credits">
+                    <label for="credits">学分</label>
+                    <input class="form-control" type="number" name="credits" id="credits" aria-label="学分" min="0" max="20" step="0.5">
                   </div>
                   <div class="form-group">
-                    <label >限制人数</label>
-                    <input required class="form-control" type="text" name="limi">
+                    <label for="limi">限制人数</label>
+                    <input required class="form-control" type="number" name="limi" id="limi" aria-label="限制人数" min="1">
                   </div>
 
                   <div class="form-group">
-                    <button class="btn btn-primary" type="submit">提交</button>
+                    <button class="btn btn-primary" type="submit" aria-label="提交课程信息">提交</button>
                   </div>
                 </form>
 

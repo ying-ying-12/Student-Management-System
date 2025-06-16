@@ -5,7 +5,7 @@
 <html lang="zh">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>教师列表</title>
     <link rel="icon" href="${pageContext.request.contextPath}/assets/favicon.ico" type="image/ico">
     <link href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css" rel="stylesheet">

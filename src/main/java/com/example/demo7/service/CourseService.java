@@ -3,7 +3,14 @@ package com.example.demo7.service;
 import com.example.demo7.dao.CourseDao;
 import com.example.demo7.entity.Course;
 import com.example.demo7.utils.PagerVO;
-
+//实现了课程的全生命周期管理，包括：
+//
+//新增课程：验证数据合法性后插入数据库
+//更新课程：修改已有课程信息
+//查询课程：按课程号查询单条记录
+//分页查询：支持条件筛选的课程列表分页
+//统计计数：获取课程总数
+//删除课程：从数据库删除课程记录
 public class CourseService {
 
     CourseDao dao = new CourseDao();// 创建数据访问对象实例，用于调用数据库操作方法

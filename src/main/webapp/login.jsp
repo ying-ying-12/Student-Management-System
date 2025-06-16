@@ -10,7 +10,7 @@
 <html lang="zh">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>登录页面</title>
     <link rel="icon" href="${pageContext.request.contextPath}/assets/favicon.ico" type="image/ico">
     <link href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css" rel="stylesheet">
@@ -61,7 +61,7 @@
 </head>
 
 <body>
-<div class="row lyear-wrapper" style="background-image: url(${pageContext.request.contextPath}/assets/images/login-bg.jpg); background-size: cover;">
+<div class="row lyear-wrapper" style="background-image: url(${pageContext.request.contextPath}/assets/images/login.jpg); background-size: cover;">
     <div class="lyear-login">
         <div class="login-center">
             <div class="login-header text-center">
@@ -71,17 +71,20 @@
             </div>
             <form action="${pageContext.request.contextPath}/login" method="post">
                 <div class="form-group has-feedback feedback-left">
-                    <input type="text" placeholder="请输入您的用户名" class="form-control" name="username" id="username" autocomplete="username" />
+                    <label for="username" class="sr-only">用户名</label>
+                    <input type="text" placeholder="请输入您的用户名" class="form-control" name="username" id="username" autocomplete="username" aria-label="用户名" />
                     <span class="mdi mdi-account form-control-feedback" aria-hidden="true"></span>
                 </div>
                 <div class="form-group has-feedback feedback-left">
-                    <input type="password" placeholder="请输入密码" class="form-control" id="password" name="password" autocomplete="current-password" />
+                    <label for="password" class="sr-only">密码</label>
+                    <input type="password" placeholder="请输入密码" class="form-control" id="password" name="password" autocomplete="current-password" aria-label="密码" />
                     <span class="mdi mdi-lock form-control-feedback" aria-hidden="true"></span>
                 </div>
 
                 <div class="form-group has-feedback feedback-left row">
                     <div class="col-xs-7">
-                        <input type="text" name="captcha" id="captcha" class="form-control" placeholder="验证码" autocomplete="off">
+                        <label for="captcha" class="sr-only">验证码</label>
+                        <input type="text" name="captcha" id="captcha" class="form-control" placeholder="验证码" autocomplete="off" aria-label="验证码">
                         <span class="mdi mdi-check-all form-control-feedback" aria-hidden="true"></span>
                     </div>
                     <div class="col-xs-5">
@@ -89,18 +92,30 @@
                              class="pull-right"
                              style="cursor: pointer;"
                              onclick="this.src=this.src+'?d='+Math.random();"
-                             title="点击刷新"
-                             alt="captcha">
+                             title="点击刷新验证码"
+                             alt="验证码图片">
                     </div>
                 </div>
 
                 <div class="form-group" style="text-align: center">
-                    <input type="radio" checked name="usertype" value="admin">管理员
-                    <input type="radio" checked name="usertype" value="teacher">教师
-                    <input type="radio" name="usertype" value="student">学生
+                    <div class="radio-inline">
+                        <label for="usertype-admin">
+                            <input type="radio" id="usertype-admin" name="usertype" value="admin" checked> 管理员
+                        </label>
+                    </div>
+                    <div class="radio-inline">
+                        <label for="usertype-teacher">
+                            <input type="radio" id="usertype-teacher" name="usertype" value="teacher"> 教师
+                        </label>
+                    </div>
+                    <div class="radio-inline">
+                        <label for="usertype-student">
+                            <input type="radio" id="usertype-student" name="usertype" value="student"> 学生
+                        </label>
+                    </div>
                 </div>
                 <div class="form-group">
-                    <button class="btn btn-block btn-primary" type="button" onclick="login()">立即登录</button>
+                    <button class="btn btn-block btn-primary" type="button" onclick="login()" aria-label="登录">立即登录</button>
                 </div>
             </form>
             <hr>
