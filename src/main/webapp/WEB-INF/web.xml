@@ -12,16 +12,16 @@
 
     <!-- MIME 类型映射 -->
     <mime-mapping>
-        <extension>woff</extension>
-        <mime-type>font/woff</mime-type>
+        <extension>woff2</extension>
+        <mime-type>application/font-woff2</mime-type>
     </mime-mapping>
     <mime-mapping>
-        <extension>woff2</extension>
-        <mime-type>font/woff2</mime-type>
+        <extension>woff</extension>
+        <mime-type>application/font-woff</mime-type>
     </mime-mapping>
     <mime-mapping>
         <extension>ttf</extension>
-        <mime-type>font/ttf</mime-type>
+        <mime-type>application/octet-stream</mime-type>
     </mime-mapping>
     <mime-mapping>
         <extension>eot</extension>
