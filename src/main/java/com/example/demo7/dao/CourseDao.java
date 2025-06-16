@@ -21,7 +21,7 @@ public class CourseDao {
             resultSet.next();
             int total = resultSet.getInt(1);
             pagerVO.setTotal(total);
-            // select * from  tb_course where .. limit 10,10
+            // select * from  tb_course where  limit 10,10
             resultSet = helper.executeQuery("select * from tb_course "
                     + whereSql + "limit " + ((current-1)*size)+ ","+size);
             List<Course> list = new ArrayList<>();
