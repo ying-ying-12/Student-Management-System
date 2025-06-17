@@ -1,9 +1,9 @@
 package com.example.demo7.entity;
 
 public class Teacher {
-    private String tno;
-    private String password;
-    private String tname;
+    private String tno;// 教师编号
+    private String password;// 密码
+    private String tname;// 教师姓名
 
     public String getTno() {
         return tno;

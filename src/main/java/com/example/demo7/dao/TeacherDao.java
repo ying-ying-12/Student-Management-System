@@ -10,15 +10,19 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+//对教师信息进行数据库操作
 public class TeacherDao {
 
-    //封页查询功能
+    //用page方法实现分页查询功能
     public PagerVO<Teacher> page(int current,int size,String whereSql){
         PagerVO<Teacher> pagerVO = new PagerVO<>();
         pagerVO.setCurrent(current);
         pagerVO.setSize(size);
         JdbcHelper helper = new JdbcHelper();
-        //查询教师数量
+        //首先查询符合条件的教师总数
+        //然后根据分页参数（当前页码 current 和每页大小 size）查询当前页的教师数据
+        //whereSql 参数用于传递额外的查询条件
+        //分页查询的 SQL 使用了 limit 子句
         ResultSet resultSet = helper.executeQuery("select count(1) from tb_teacher " + whereSql);
         try {
             resultSet.next();
@@ -44,14 +48,18 @@ public class TeacherDao {
 
     //管理员插入教师
     public int insert(Teacher teacher){
+        //使用 JdbcHelper 执行 SQL 插入语句
         JdbcHelper helper = new JdbcHelper();
+//        参数通过 teacher 对象获取，包括教师编号、密码和姓名
         int res = helper.excuteUpdate("insert into tb_teacher values(?,?,?)",
                 teacher.getTno(),teacher.getPassword(),teacher.getTname()
         );
         return res;
     }
 
-    //更新
+    //用update更新教师信息
+    //动态拼接 SQL 更新语句，根据 teacher 对象的属性判断哪些字段需要更新
+    ////使用 params 列表存储 SQL 参数。
     public int update(Teacher teacher){
         JdbcHelper helper = new JdbcHelper();
         int res = 0;
@@ -73,7 +81,8 @@ public class TeacherDao {
         return res;
     }
 
-    //删除
+    //根据教师编号删除教师
+    //使用 JdbcHelper 执行 SQL 删除语句
     public int delete(String tno){
         JdbcHelper helper = new JdbcHelper();
         int res = helper.excuteUpdate("delete from tb_teacher where tno = ?",tno);
@@ -81,7 +90,8 @@ public class TeacherDao {
         return res;
     }
 
-    //计数
+    //count方法统计符合条件的教师数量
+    //执行 SQL 查询语句，统计符合条件的记录数
     public int count(String whereSql){
         if(whereSql == null){
             whereSql = "";
@@ -99,11 +109,13 @@ public class TeacherDao {
         return 0;
     }
 
-    //计数
+    // 统计所有教师数量
     public int count(){
         return count("");
     }
 
+    //根据教师编号查询教师信息（getByTno方法）
+    //使用 JdbcHelper 执行 SQL 查询语句，将查询结果封装为 Teacher 对象
     public Teacher getByTno(String tno){
         JdbcHelper helper = new JdbcHelper();
         ResultSet resultSet = helper.executeQuery("select * from tb_teacher where tno = ?", tno);
@@ -119,6 +131,7 @@ public class TeacherDao {
         return null;
     }
 
+    // 将结果集转换为Teacher对象
     public Teacher toEntity(ResultSet resultSet) throws SQLException {
         Teacher teacher = new Teacher();
         teacher.setTno(resultSet.getString("tno"));
@@ -127,6 +140,8 @@ public class TeacherDao {
         return teacher;
     }
 
+    //查询所有教师信息（ListAll方法）
+    //执行SQL查询语句，将结果封装为Teacher对象列表
     public List<Teacher> ListAll() {
         JdbcHelper helper = new JdbcHelper();
         ResultSet resultSet;

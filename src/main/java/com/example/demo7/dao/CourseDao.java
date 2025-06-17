@@ -9,9 +9,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+//对课程信息进行数据库操作，包括分页查询、插入、更新、删除、计数以及根据课程编号查询等功能
 public class CourseDao {
-
+    //分页查询（page 方法）
     public PagerVO<Course> page(int current,int size,String whereSql){
+        //首先查询符合条件的课程总数
+        //然后根据分页参数（当前页码 current 和每页大小 size）查询当前页的课程数据
+        //将查询结果封装到 PagerVO<Course> 对象中返回
         PagerVO<Course> pagerVO = new PagerVO<>();
         pagerVO.setCurrent(current);
         pagerVO.setSize(size);
@@ -39,6 +43,9 @@ public class CourseDao {
         return pagerVO;
     }
 
+    //插入课程信息（insert 方法）
+    //使用 JdbcHelper 执行 SQL 插入语句
+    //参数通过 course 对象获取，包括课程编号、教师编号、课程名称等
     public int insert(Course course){
         JdbcHelper helper = new JdbcHelper();
         int res = helper.excuteUpdate("insert into tb_course values(?,?,?,?,?,?,?,?)",
@@ -49,11 +56,9 @@ public class CourseDao {
         return res;
     }
 
-    /**
-     * Course 里面有属性为null的话，就忽视，不是null的话，就加入更新的sql语句，进行更新
-     * @param course
-     * @return
-     */
+    //根据课程编号更新课程信息（update 方法）
+    //动态拼接 SQL 更新语句，根据 course 对象的属性判断哪些字段需要更新
+    //使用 params 列表存储 SQL 参数
     public int update(Course course){
         JdbcHelper helper = new JdbcHelper();
         int res = 0;
@@ -93,6 +98,9 @@ public class CourseDao {
         return res;
     }
 
+    //根据课程编号删除课程记录
+    //使用 JdbcHelper 执行 SQL 删除语句
+    //参数为课程编号 cno
     public int delete(String cno){
         JdbcHelper helper = new JdbcHelper();
         int res = helper.excuteUpdate("delete from tb_course where cno = ?",cno);
@@ -100,6 +108,9 @@ public class CourseDao {
         return res;
     }
 
+    //统计符合条件的课程数量
+    //执行 SQL 查询语句，统计符合条件的记录数
+    //提供了两个版本：带条件的 count 和无条件的 count
     public int count(String whereSql){
         if(whereSql == null){
             whereSql = "";
@@ -116,11 +127,13 @@ public class CourseDao {
         }
         return 0;
     }
-
     public int count(){
         return count("");
     }
 
+    //根据课程编号查询课程信息（getByCno 方法）
+    //使用 JdbcHelper 执行 SQL 查询语句
+    //将查询结果封装为 Course 对象
     public Course getByCno(String cno){
         JdbcHelper helper = new JdbcHelper();
         ResultSet resultSet = helper.executeQuery("select * from tb_course where cno = ?", cno);
@@ -136,6 +149,8 @@ public class CourseDao {
         return null;
     }
 
+    //将 ResultSet 数据封装为 Course 对象（toEntity 方法）
+    //遍历 ResultSet，将每一列的值设置到 Course 对象的属性中
     public Course toEntity(ResultSet resultSet) throws SQLException {
         Course course = new Course();
         course.setCno(resultSet.getString("cno"));
@@ -148,6 +163,5 @@ public class CourseDao {
         course.setCount(resultSet.getInt("count"));
         return course;
     }
-
 }
 

@@ -2,17 +2,18 @@ package com.example.demo7.entity;
 
 import java.util.Date;
 
+//课程实体
 public class Course {
 
     private Teacher teacher;
-   private String cno;
-   private String tno;
-   private String cname;
-   private Date begindate;
-   private Date enddate;
-   private Double credits;
-   private Integer limi;
-   private Integer count;
+   private String cno;//课程编号
+   private String tno;//教师编号
+   private String cname;//课程名称
+   private Date begindate;//课程开始日期
+   private Date enddate;//课程结束日期
+   private Double credits;//学分
+   private Integer limi;//课程人数限制
+   private Integer count;//已选人数
 
     public Teacher getTeacher() {
         return teacher;
