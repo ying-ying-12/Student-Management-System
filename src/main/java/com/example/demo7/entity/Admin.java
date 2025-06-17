@@ -1,5 +1,5 @@
 package com.example.demo7.entity;
-
+//封装管理员的用户名和密码信息
 public class Admin {
     private String username;//用户名
     private String password;//密码

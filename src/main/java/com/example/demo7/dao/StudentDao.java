@@ -13,6 +13,7 @@ import java.util.List;
 public class StudentDao {
 
     public PagerVO<Student> page(int current,int size,String whereSql){
+        // 创建分页对象并设置当前页和每页大小
         PagerVO<Student> pagerVO = new PagerVO<>();
         pagerVO.setCurrent(current);
         pagerVO.setSize(size);
@@ -22,7 +23,7 @@ public class StudentDao {
             resultSet.next();
             int total = resultSet.getInt(1);
             pagerVO.setTotal(total);
-            // select * from  tb_student where .. limit 10,10
+
             resultSet = helper.executeQuery("select * from tb_student "
                     + whereSql + "limit " + ((current-1)*size)+ ","+size);
             List<Student> list = new ArrayList<>();
@@ -50,11 +51,7 @@ public class StudentDao {
         return res;
     }
 
-    /**
-     * Student 里面有属性为null的话，就忽视，不是null的话，就加入更新的sql语句，进行更新
-     * @param student
-     * @return
-     */
+    // 动态构建SQL语句，只更新非空字段
     public int update(Student student){
         JdbcHelper helper = new JdbcHelper();
         int res = 0;
@@ -87,6 +84,7 @@ public class StudentDao {
             sql += "clazzno = ?,";
             params.add(student.getClazzno());
         }
+        // 移除最后一个逗号并添加条件子句
         sql = sql.substring(0,sql.length() - 1);
         sql += " where sno = '"+student.getSno() + "'";
         System.out.println(sql);
@@ -138,7 +136,7 @@ public class StudentDao {
         }
         return null;
     }
-
+//将数据库结果集转换为学生实体对象
     public Student toEntity(ResultSet resultSet) throws SQLException {
         Student student = new Student();
         student.setSno(resultSet.getString("sno"));

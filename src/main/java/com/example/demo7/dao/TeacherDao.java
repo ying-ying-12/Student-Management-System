@@ -22,7 +22,7 @@ public class TeacherDao {
             resultSet.next();
             int total = resultSet.getInt(1);
             pagerVO.setTotal(total);
-            // select * from  tb_teacher where .. limit 10,10
+            // select * from  tb_teacher where  limit 10,10
             resultSet = helper.executeQuery("select * from tb_teacher "
                     + whereSql + "limit " + ((current-1)*size)+ ","+size);
             List<Teacher> list = new ArrayList<>();

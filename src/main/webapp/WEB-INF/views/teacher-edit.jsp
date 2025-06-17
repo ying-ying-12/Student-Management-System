@@ -4,8 +4,8 @@
 <html lang="zh">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
-  <title>编辑教师</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>修改教师</title>
   <link rel="icon" href="${pageContext.request.contextPath}/assets/favicon.ico" type="image/ico">
   <link href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css" rel="stylesheet">
   <link href="${pageContext.request.contextPath}/assets/css/materialdesignicons.min.css" rel="stylesheet">

@@ -16,7 +16,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-
+//用于处理用户登录请求，验证用户身份并管理会话
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 

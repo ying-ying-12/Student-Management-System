@@ -16,7 +16,12 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
-
+//处理路径为/teacher的请求，主要实现：
+//
+//查询功能：支持分页查询教师信息，可按工号、姓名筛选
+//添加功能：管理员可添加新教师
+//编辑功能：管理员可修改教师信息
+//删除功能：管理员可删除教师记录
 @WebServlet("/teacher")
 public class TeacherServlet extends HttpServlet {
     TeacherService teacherService = new TeacherService();

@@ -1,4 +1,3 @@
-//首页
 package com.example.demo7.servlet;
 
 import com.example.demo7.entity.Clazz;
@@ -18,6 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+//处理路径为/index的 GET 请求，返回一个包含班级数量、学生数量和班级统计信息的 JSON 响应
 @WebServlet("/index")
 public class IndexServlet extends HttpServlet {
 

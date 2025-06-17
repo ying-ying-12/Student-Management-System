@@ -17,7 +17,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Date;
-
+//实现了学生选课系统的核心功能：
+//
+//查询功能：支持分页查询选课记录，可按学号、课程号、选课时间筛选
+//新增功能：学生可以选择课程
+//编辑功能：教师可以为学生的课程打分并评价
+//删除功能：学生可以退选课程
 @WebServlet("/stucou")
 public class StuCouServlet extends HttpServlet {
     StuCouService stucouService = new StuCouService();
