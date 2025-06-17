@@ -83,7 +83,7 @@
                                     <td>${i.sno}</td>
                                     <td>${i.name}</td>
                                     <td>${i.tele}</td>
-                                    <td><fmt:formatDate value="${i.enterdate}" pattern="yyyy年MM月dd日" /></td>
+                                    <td><fmt:formatDate value="${i.enterdate}" pattern="yyyy年mm月dd日" /></td>
                                     <td>${i.age}</td>
                                     <td>${i.gender == 'm'?'男':(i.gender == 'w'?'女':'')}</td>
                                     <td>${i.address}</td>
