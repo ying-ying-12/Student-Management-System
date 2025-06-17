@@ -26,7 +26,7 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setCharacterEncoding("utf-8");
+        req.setCharacterEncoding("utf-8");// 设置编码，否则从前端获取参数乱码
         resp.setContentType("application/json; charset=utf-8");
 
         String captcha = req.getParameter("captcha");
@@ -39,7 +39,7 @@ public class LoginServlet extends HttpServlet {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
         String usertype = req.getParameter("usertype");
-        //判断角色
+        //登录判断角色
         if("admin".equals(usertype)) {
             Admin admin = adminService.getByUsername(username);
                 if (admin == null) {
@@ -47,6 +47,7 @@ public class LoginServlet extends HttpServlet {
                     return;
                 }
                 if (admin.getPassword().equals(password)) {
+                    //密码相等就把用户信息设置到seession
                     req.getSession().setAttribute("user", admin);
                     req.getSession().setAttribute("role", "admin");
                     resp.getWriter().print(ApiResult.json(true, "登录成功"));

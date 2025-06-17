@@ -48,7 +48,7 @@ public class StudentService {
 
     public PagerVO<Student> page(int current,int size,String sno,String name,String gender,String clazzno){
         String whereSql = " where 1=1 ";
-        //拼接
+        //拼接sql查询语句
         if(sno!=null && !"".equals(sno)){
             whereSql += " and sno like '%" + sno + "%'";
         }
