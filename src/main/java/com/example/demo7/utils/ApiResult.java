@@ -1,13 +1,14 @@
 package com.example.demo7.utils;
-
+//工具类
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 
+//用于给前端ajax请求返回信息
 public class ApiResult {
 
-    private Boolean success;
-    private String message;
-    private Object data;
+    private Boolean success;//判断是否删除成功或者登录是否成功
+    private String message;//提示信息
+    private Object data;//返回数据给前端
 
     public static String json(Boolean success,String message,Object data){
         ApiResult r = new ApiResult();
@@ -20,6 +21,8 @@ public class ApiResult {
             SerializerFeature.WriteNullListAsEmpty);
         return json;
     }
+
+    //重载
     // Getter和Setter方法，用于封装数据
     public static String json(Boolean success,String message){
         return json(success,message,null);

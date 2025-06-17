@@ -15,15 +15,18 @@ public class StudentDao {
     public PagerVO<Student> page(int current,int size,String whereSql){
         // 创建分页对象并设置当前页和每页大小
         PagerVO<Student> pagerVO = new PagerVO<>();
+        //返回数据
         pagerVO.setCurrent(current);
         pagerVO.setSize(size);
+        //查询记录
         JdbcHelper helper = new JdbcHelper();
         ResultSet resultSet = helper.executeQuery("select count(1) from tb_student " + whereSql);
         try {
             resultSet.next();
             int total = resultSet.getInt(1);
-            pagerVO.setTotal(total);
+            pagerVO.setTotal(total);//获取记录
 
+            //查询数据
             resultSet = helper.executeQuery("select * from tb_student "
                     + whereSql + "limit " + ((current-1)*size)+ ","+size);
             List<Student> list = new ArrayList<>();
@@ -117,6 +120,7 @@ public class StudentDao {
         return 0;
     }
 
+    //学生统计
     public int count(){
         return count("");
     }
