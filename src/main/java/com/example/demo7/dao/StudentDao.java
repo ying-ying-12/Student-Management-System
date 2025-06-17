@@ -19,14 +19,17 @@ public class StudentDao {
         pagerVO.setCurrent(current);
         pagerVO.setSize(size);
         //查询记录
+        // 创建 JdbcHelper 实例，用于执行 SQL 查询
         JdbcHelper helper = new JdbcHelper();
+        // 查询符合条件的记录总数
         ResultSet resultSet = helper.executeQuery("select count(1) from tb_student " + whereSql);
         try {
             resultSet.next();
             int total = resultSet.getInt(1);
-            pagerVO.setTotal(total);//获取记录
+            // 设置总记录数
+            pagerVO.setTotal(total);
 
-            //查询数据
+            // 查询当前页的学生记录
             resultSet = helper.executeQuery("select * from tb_student "
                     + whereSql + "limit " + ((current-1)*size)+ ","+size);
             List<Student> list = new ArrayList<>();
@@ -39,13 +42,16 @@ public class StudentDao {
         }catch (Exception e){
             e.printStackTrace();
         }finally {
+            // 关闭数据库连接
             helper.closeDB();
         }
         return pagerVO;
     }
 
     public int insert(Student student){
+        // 创建 JdbcHelper 实例，用于执行 SQL 插入操作
         JdbcHelper helper = new JdbcHelper();
+        // 执行插入操作
         int res = helper.excuteUpdate("insert into tb_student values(?,?,?,?,?,?,?,?,?)",
                 student.getSno(),student.getPassword(),student.getName(),
                 student.getTele(),student.getEnterdate(),student.getAge(),
@@ -96,6 +102,7 @@ public class StudentDao {
         return res;
     }
 
+    //删除功能
     public int delete(String sno){
         JdbcHelper helper = new JdbcHelper();
         int res = helper.excuteUpdate("delete from tb_student where sno = ?",sno);
@@ -142,6 +149,7 @@ public class StudentDao {
 //将数据库结果集转换为学生实体对象
     public Student toEntity(ResultSet resultSet) throws SQLException {
         Student student = new Student();
+        // 设置学生属性
         student.setSno(resultSet.getString("sno"));
         student.setPassword(resultSet.getString("password"));
         student.setName(resultSet.getString("name"));
