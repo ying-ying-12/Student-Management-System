@@ -56,7 +56,7 @@ public class CourseServlet extends HttpServlet {
                 course.setTeacher(tmap.get(course.getTno()));
             }
 
-            req.setAttribute("now",new Date());
+            //
             req.setAttribute("teacheres",teacheres);
             req.setAttribute("cno",cno);
             req.setAttribute("tno",tno);

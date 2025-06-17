@@ -12,8 +12,7 @@
     <link href="${pageContext.request.contextPath}/assets/css/style.min.css" rel="stylesheet">
     <!--日期选择插件-->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/js/bootstrap-datepicker/bootstrap-datepicker3.min.css">
-    <!--时间选择插件-->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/js/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css">
+
 </head>
 
 <body>
@@ -43,14 +42,14 @@
                                     </div>
                                     <div class="form-group">
                                         <label >选课开始时间</label>
-                                        <input value="${entity.begindate}" class="form-control js-datetimepicker" type="text"
-                                               name="begindate" placeholder="请选择具体时间" data-side-by-side="true" data-locale="zh-cn" date-format="yyyy-MM-DD HH:mm:ss" />
+                                        <input class="form-control js-datepicker m-b-10" type="text"
+                                               name="begindate" placeholder="yyyy-mm-dd" value="" data-date-format="yyyy-mm-dd " />
 
                                     </div>
                                     <div class="form-group">
                                         <label >选课结束时间</label>
-                                        <input value="${entity.enddate}" class="form-control js-datetimepicker" type="text"
-                                               name="enddate" placeholder="请选择具体时间" data-side-by-side="true" data-locale="zh-cn" date-format="yyyy-MM-DD HH:mm:ss" />
+                                        <input class="form-control js-datepicker m-b-10" type="text"
+                                               name="enddate" placeholder="yyyy-mm-dd" value="" data-date-format="yyyy-mm-dd " />
                                     </div>
                                     <div class="form-group">
                                         <label >学分</label>
