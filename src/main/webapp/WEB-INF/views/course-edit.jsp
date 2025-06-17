@@ -42,13 +42,13 @@
                                     </div>
                                     <div class="form-group">
                                         <label >选课开始时间</label>
-                                        <input class="form-control js-datepicker m-b-10" type="text"
+                                        <input value="${entity.begindate}" required class="form-control js-datepicker m-b-10" type="text"
                                                name="begindate" placeholder="yyyy-mm-dd" value="" data-date-format="yyyy-mm-dd " />
 
                                     </div>
                                     <div class="form-group">
                                         <label >选课结束时间</label>
-                                        <input class="form-control js-datepicker m-b-10" type="text"
+                                        <input value="${entity.enddate}" required class="form-control js-datepicker m-b-10" type="text"
                                                name="enddate" placeholder="yyyy-mm-dd" value="" data-date-format="yyyy-mm-dd " />
                                     </div>
                                     <div class="form-group">

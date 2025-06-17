@@ -16,6 +16,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -103,9 +104,17 @@ public class CourseServlet extends HttpServlet {
             course.setTno(teacher.getTno());
             course.setCname(req.getParameter("cname"));
             String begindate = req.getParameter("begindate");
-            course.setBegindate(MyUtils.strToDate(begindate));
+            try {
+                course.setBegindate(MyUtils.strToDate(begindate));
+            } catch (ParseException e) {
+                throw new RuntimeException(e);
+            }
             String enddate = req.getParameter("enddate");
-            course.setEnddate(MyUtils.strToDate(enddate));
+            try {
+                course.setEnddate(MyUtils.strToDate(enddate));
+            } catch (ParseException e) {
+                throw new RuntimeException(e);
+            }
 
             String credits = req.getParameter("credits");
             course.setCredits(Double.parseDouble(credits));
