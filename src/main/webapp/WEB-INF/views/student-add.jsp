@@ -71,9 +71,7 @@
                                         <label for="clazzno">班级</label>
                                         <select class="form-control" name="clazzno" id="clazzno" size="1" aria-label="班级">
                                             <option value="">请选择</option>
-                                            <option value="1001">软件一班</option>
-                                            <option value="1002">软件二班</option>
-                                            <c:forEach items="${clazzes}" var="i" varStatus="s">
+                                            <c:forEach items="${clazzes}" var="i">
                                             <option value="${i.clazzno}">${i.clazzno} / ${i.name}</option>
                                             </c:forEach>
                                         </select>
