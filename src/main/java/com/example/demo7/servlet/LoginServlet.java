@@ -1,7 +1,5 @@
 package com.example.demo7.servlet;
 
-
-
 import com.example.demo7.entity.Admin;
 import com.example.demo7.entity.Student;
 import com.example.demo7.entity.Teacher;

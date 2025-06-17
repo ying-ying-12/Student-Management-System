@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class AdminDao {
-
+//根据用户名查询管理员信息
     public Admin getByUsername(String username){
         JdbcHelper helper = new JdbcHelper();
         ResultSet resultSet = helper.executeQuery("select * from tb_admin where username = ?", username);

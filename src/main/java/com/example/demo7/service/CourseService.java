@@ -22,7 +22,7 @@ public class CourseService {
             return "课程编号不可为空";
         }if(course.getCname() == null || course.getCname().equals("")){
             return "课程名不可为空";
-        }if(course.getBegindate() == null || course.getEnddate().equals("")){
+        }if(course.getBegindate() == null || course.getEnddate() == null){
             return "开始和结束时间不可为空";
         }if(course.getLimi() == null){
             return "限制人数不可为空";

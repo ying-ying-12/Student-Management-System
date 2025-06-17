@@ -6,8 +6,11 @@ import com.example.demo7.utils.PagerVO;
 
 public class StudentService {
 
-    StudentDao dao = new StudentDao();// 创建数据访问对象实例，用于调用数据库操作方法
-//新增
+    // 创建 StudentDao 实例，用于调用数据访问方法
+    // 创建数据访问对象实例，用于调用数据库操作方法
+    StudentDao dao = new StudentDao();
+
+    //新增
     public String insert(Student student){
         // 验证信息是否为空
         if(student.getSno() == null || student.getSno().equals("")){
@@ -24,14 +27,18 @@ public class StudentService {
         if(ex !=null){
             return "学号已存在！";
         }
+        // 调用 StudentDao 的 insert 方法插入学生信息
         dao.insert(student);
         return null;
     }
-//更新
+
+
+    // 验证被修改的学生学号是否为空
     public String update(Student student){
         if(student.getSno() == null || student.getSno().equals("")){
             return "被修改的学生学号不可为空";
         }
+        // 调用 StudentDao 的 update 方法更新学生信息
         dao.update(student);
         return null;//成功
     }
@@ -47,8 +54,10 @@ public class StudentService {
     }
 
     public PagerVO<Student> page(int current,int size,String sno,String name,String gender,String clazzno){
+        // 初始化查询条件 SQL 语句
         String whereSql = " where 1=1 ";
-        //拼接sql查询语句
+        // 根据传入的查询条件拼接 SQL 语句
+        //模糊查询
         if(sno!=null && !"".equals(sno)){
             whereSql += " and sno like '%" + sno + "%'";
         }
@@ -61,8 +70,11 @@ public class StudentService {
         if(clazzno!=null && !"".equals(clazzno)){
             whereSql += " and clazzno = '" + clazzno + "'";
         }
+        // 调用 StudentDao 的 page 方法进行分页查询
         return dao.page(current,size,whereSql);
     }
+
+    //删除功能
     public int delete(String sno){
         return dao.delete(sno);
     }
