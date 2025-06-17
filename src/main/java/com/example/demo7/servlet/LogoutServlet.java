@@ -5,9 +5,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-/**
- * 用于登出的Servlet
- */
 //销毁用户的会话（Session）并将用户重定向到登录页面，从而实现用户的安全退出
 @WebServlet("/logout")
 public class LogoutServlet extends HttpServlet {

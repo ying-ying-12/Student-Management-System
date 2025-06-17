@@ -30,30 +30,30 @@
               <div class="card-body">
                 <form id="myForm" action="${pageContext.request.contextPath}/course?r=add" method="post">
                   <div class="form-group">
-                    <label >课程编号</label>
-                    <input required class="form-control" type="text" name="cno">
+                    <label for="cno">课程编号</label>
+                    <input required class="form-control" type="text" name="cno" id="cno" placeholder="请输入课程编号">
                   </div>
                   <div class="form-group">
-                    <label >课程名</label>
-                    <input required class="form-control" type="text" name="cname">
+                    <label for="cname">课程名</label>
+                    <input required class="form-control" type="text" name="cname" id="cname" placeholder="请输入课程名">
                   </div>
                   <div class="form-group">
-                    <label >选课开始时间</label>
+                    <label for="begindate">选课开始时间</label>
                     <input value="${entity.begindate}" required class="form-control js-datepicker m-b-10" type="text"
-                           name="begindate" placeholder="yyyy-mm-dd" value="" data-date-format="yyyy-mm-dd " />
+                           name="begindate" id="begindate" placeholder="yyyy-mm-dd" value="" data-date-format="yyyy-mm-dd" />
                   </div>
                   <div class="form-group">
-                    <label >选课结束时间</label>
+                    <label for="enddate">选课结束时间</label>
                     <input value="${entity.enddate}" required class="form-control js-datepicker m-b-10" type="text"
-                           name="enddate" placeholder="yyyy-mm-dd" value="" data-date-format="yyyy-mm-dd " />
+                           name="enddate" id="enddate" placeholder="yyyy-mm-dd" value="" data-date-format="yyyy-mm-dd" />
                   </div>
                   <div class="form-group">
-                    <label >学分</label>
-                    <input class="form-control" type="number" name="credits">
+                    <label for="credits">学分</label>
+                    <input class="form-control" type="number" name="credits" id="credits" placeholder="请输入学分">
                   </div>
                   <div class="form-group">
-                    <label >限制人数</label>
-                    <input required class="form-control" type="text" name="limi">
+                    <label for="limi">限制人数</label>
+                    <input required class="form-control" type="text" name="limi" id="limi" placeholder="请输入限制人数">
                   </div>
 
                   <div class="form-group">
