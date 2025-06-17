@@ -48,7 +48,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="enterdate">入学日期</label>
-                                        <input value="${entity.enterdate}" required class="form-control js-datepicker m-b-10" type="text"
+                                        <input class="form-control js-datepicker m-b-10" type="text"
                                                name="enterdate" id="enterdate" placeholder="yyyy-mm-dd" value="" data-date-format="yyyy-mm-dd" aria-label="入学日期" />
                                     </div>
                                     <div class="form-group">
