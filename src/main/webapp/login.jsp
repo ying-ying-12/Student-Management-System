@@ -62,7 +62,7 @@
 </head>
 
 <body>
-<div class="row lyear-wrapper" style="background-image: url(${pageContext.request.contextPath}/assets/images/login.jpg); background-size: cover;">
+<div class="row lyear-wrapper" style="background-image: url(${pageContext.request.contextPath}/assets/images/login.png); background-size: cover;">
     <div class="lyear-login">
         <div class="login-center">
             <div class="login-header text-center">
