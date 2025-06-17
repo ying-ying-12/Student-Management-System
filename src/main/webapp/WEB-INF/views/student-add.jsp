@@ -71,6 +71,8 @@
                                         <label >班级</label>
                                         <select class="form-control" name="clazzno" size="1">
                                             <option value="">请选择</option>
+                                            <option value="1001">软件一班</option>
+                                            <option value="1002">软件二班</option>
                                             <c:forEach items="${clazzes}" var="i" varStatus="s">
                                             <option value="${i.clazzno}">${i.clazzno} / ${i.name}</option>
                                             </c:forEach>

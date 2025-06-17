@@ -39,14 +39,14 @@
                   </div>
                   <div class="form-group">
                     <label >选课开始时间</label>
-                    <input required class="form-control js-datetimepicker" type="text"
-                           name="begindate" placeholder="请选择具体时间" data-side-by-side="true" data-locale="zh-cn" date-format="yyyy-MM-DD HH:mm:ss" />
+                    <input  class="form-control js-datepicker" type="text"
+                           name="begindate" placeholder="yyyy-mm-dd" value="" data-date-format="yyyy-mm-dd" />
 
                   </div>
                   <div class="form-group">
                     <label >选课结束时间</label>
-                    <input required class="form-control js-datetimepicker" type="text"
-                           name="enddate" placeholder="请选择具体时间" data-side-by-side="true" data-locale="zh-cn" date-format="yyyy-MM-DD HH:mm:ss" />
+                    <input  class="form-control js-datepicker" type="text"
+                           name="enddate" placeholder="yyyy-mm-dd" value="" data-date-format="yyyy-mm-dd" />
                   </div>
                   <div class="form-group">
                     <label >学分</label>

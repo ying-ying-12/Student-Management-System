@@ -17,11 +17,7 @@ public class MyUtils {
      * 字符串转日期
      */
     public static Date strToDate(String str){
-        String pt = "yyyy-MM-dd HH:mm:ss";
-        if (str.length() !=pt.length()){
-            pt = "yyyy-MM-dd";
-        }
-        SimpleDateFormat format = new SimpleDateFormat(pt);
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd ");
         try {
             return format.parse(str);
         } catch (ParseException e) {

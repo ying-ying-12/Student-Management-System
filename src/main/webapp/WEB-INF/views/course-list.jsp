@@ -72,9 +72,9 @@
                                         <c:if test="${sessionScope.role == 'teacher'}">
                                             <th>操作</th>
                                         </c:if>
-                                        <c:if test="${sessionScope.role == 'student'}">
+                                        <%--<c:if test="${sessionScope.role == 'student'}">
                                             <th>选课</th>
-                                        </c:if>
+                                        </c:if>--%>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -84,18 +84,12 @@
                                             <td>${i.cno}</td>
                                             <td>${i.tno}/${i.teacher.tname}</td>
                                             <td>${i.cname}</td>
-                                            <td><fmt:formatDate value="${i.begindate}" pattern="yyyy年MM月dd日 HH:mm:ss" /></td>
-                                            <td><fmt:formatDate value="${i.enddate}" pattern="yyyy年MM月dd日 HH:mm:ss" /></td>
+                                            <td><fmt:formatDate value="${i.begindate}" pattern="yyyy年MM月dd日 " /></td>
+                                            <td><fmt:formatDate value="${i.enddate}" pattern="yyyy年MM月dd日 " /></td>
                                             <td>${i.credits}</td>
                                             <td>${i.limi}</td>
                                             <td>${i.count}</td>
-                                            <c:if test="${sessionScope.role == 'student'}">
-                                                <td>
-                                                    <c:if test="${i.limi > i.count && i.begindate <= now && i.enddate > now}">
-                                                        <button class="btn btn-danger btn-xs" type="button" onclick="choose('${i.cno}')">选课</button>
-                                                    </c:if>
-                                                </td>
-                                            </c:if>
+
                                             <c:if test="${sessionScope.role == 'teacher'}">
                                                 <td>
                                                     <%--教师只能编辑和删除自己课程--%>
@@ -153,30 +147,6 @@
                 lightyear.notify("请求失败，请检查！", 'danger', 3000);
             }
         })
-    }
-    function choose(cno) {
-        if (confirm("确认选课？")) {
-            lightyear.loading('show');
-            $.ajax({
-                type: 'post',
-                url: '${pageContext.request.contextPath}/stucou?r=add',
-                data: {cno},
-                success: function (response) {
-                    if (response.success) {
-                        lightyear.loading('hide');
-                        lightyear.url('${pageContext.request.contextPath}/stucou');
-                        lightyear.notify(response.message, 'success', 500);
-                    } else {
-                        lightyear.loading('hide');
-                        lightyear.notify(response.message, 'danger', 3000);
-                    }
-                },
-                error: function () {
-                    lightyear.loading('hide');
-                    lightyear.notify("请求失败，请检查！", 'danger', 3000);
-                }
-            })
-        }
     }
 </script>
 </body>
