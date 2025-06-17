@@ -15,6 +15,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -103,7 +104,11 @@ public class StudentServlet extends HttpServlet {
             student.setAddress(req.getParameter("address"));
             student.setClazzno(req.getParameter("clazzno"));
             String enterdate = req.getParameter("enterdate");
-            student.setEnterdate(MyUtils.strToDate(enterdate));
+            try {
+                student.setEnterdate(MyUtils.strToDate(enterdate));
+            } catch (ParseException e) {
+                throw new RuntimeException(e);
+            }
             String age = req.getParameter("age");
             student.setAge(Integer.parseInt(age));
 

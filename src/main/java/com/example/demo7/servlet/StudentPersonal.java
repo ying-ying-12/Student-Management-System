@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.Objects;
 // 处理路径为/student-personal的 POST 请求
 //
@@ -47,7 +48,11 @@ public class StudentPersonal extends HttpServlet {
             student.setTele(req.getParameter("tele"));
             student.setGender(req.getParameter("gender"));
             student.setAddress(req.getParameter("address"));
-            student.setEnterdate(MyUtils.strToDate(req.getParameter("enterdate")));
+            try {
+                student.setEnterdate(MyUtils.strToDate(req.getParameter("enterdate")));
+            } catch (ParseException e) {
+                throw new RuntimeException(e);
+            }
             String ageStr = req.getParameter("age");
             if(ageStr != null){
                 student.setAge(Integer.parseInt(ageStr));
