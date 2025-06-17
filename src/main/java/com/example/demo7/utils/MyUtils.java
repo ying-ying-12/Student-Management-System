@@ -17,7 +17,7 @@ public class MyUtils {
      * 字符串转日期
      */
     public static Date strToDate(String datestr) throws  ParseException{
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd ");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         try {
             return format.parse(datestr);
         } catch (ParseException e) {

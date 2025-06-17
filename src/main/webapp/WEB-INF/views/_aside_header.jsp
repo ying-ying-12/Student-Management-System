@@ -18,7 +18,9 @@
                 <li class="nav-item nav-item-has-subnav open">
                     <a href="javascript:void(0)"><i class="mdi mdi-format-align-justify"></i> 功能</a>
                     <ul class="nav nav-subnav">
+                        <c:if test="${sessionScope.role != 'student'}">
                         <li> <a href="${pageContext.request.contextPath}/student">学生信息</a> </li>
+                        </c:if>
                         <li> <a href="${pageContext.request.contextPath}/teacher">教师信息</a> </li>
                         <li> <a href="${pageContext.request.contextPath}/clazz">班级信息</a> </li>
                         <li> <a href="${pageContext.request.contextPath}/course">课程信息</a> </li>
