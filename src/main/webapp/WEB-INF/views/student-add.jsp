@@ -1,10 +1,10 @@
-
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="zh">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>新增学生</title>
     <link rel="icon" href="${pageContext.request.contextPath}/assets/favicon.ico" type="image/ico">
     <link href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css" rel="stylesheet">
@@ -31,45 +31,45 @@
                             <div class="card-body">
                                 <form id="myForm" action="${pageContext.request.contextPath}/student?r=add" method="post">
                                     <div class="form-group">
-                                        <label >学号</label>
-                                        <input required class="form-control" type="text" name="sno">
+                                        <label for="sno">学号</label>
+                                        <input required class="form-control" type="text" name="sno" id="sno" aria-label="学号" placeholder="请输入学号">
                                     </div>
                                     <div class="form-group">
-                                        <label >密码</label>
-                                        <input required class="form-control" type="password" name="password">
+                                        <label for="password">密码</label>
+                                        <input required class="form-control" type="password" name="password" id="password" aria-label="密码" placeholder="请输入密码" autocomplete="new-password">
                                     </div>
                                     <div class="form-group">
-                                        <label >姓名</label>
-                                        <input required class="form-control" type="text" name="name">
+                                        <label for="name">姓名</label>
+                                        <input required class="form-control" type="text" name="name" id="name" aria-label="姓名" placeholder="请输入姓名">
                                     </div>
                                     <div class="form-group">
-                                        <label >电话</label>
-                                        <input class="form-control" type="text" name="tele">
+                                        <label for="tele">电话</label>
+                                        <input class="form-control" type="tel" name="tele" id="tele" aria-label="电话" placeholder="请输入电话号码" pattern="[0-9]{11}">
                                     </div>
                                     <div class="form-group">
-                                        <label >入学日期</label>
+                                        <label for="enterdate">入学日期</label>
                                         <input class="form-control js-datepicker m-b-10" type="text"
-                                               name="enterdate" placeholder="yyyy-mm-dd" value="" data-date-format="yyyy-mm-dd" />
+                                               name="enterdate" id="enterdate" placeholder="yyyy-mm-dd" value="" data-date-format="yyyy-mm-dd" aria-label="入学日期" />
                                     </div>
                                     <div class="form-group">
-                                        <label >年龄</label>
-                                        <input class="form-control" type="number" name="age">
+                                        <label for="age">年龄</label>
+                                        <input class="form-control" type="number" name="age" id="age" aria-label="年龄" min="1" max="100">
                                     </div>
                                     <div class="form-group">
-                                        <label >性别</label>
-                                        <select class="form-control" name="gender" size="1">
+                                        <label for="gender">性别</label>
+                                        <select class="form-control" name="gender" id="gender" size="1" aria-label="性别">
                                             <option value="">请选择</option>
                                             <option value="m">男</option>
                                             <option value="w">女</option>
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <label >详细地址</label>
-                                        <textarea class="form-control" name="address"></textarea>
+                                        <label for="address">详细地址</label>
+                                        <textarea class="form-control" name="address" id="address" aria-label="详细地址" placeholder="请输入详细地址"></textarea>
                                     </div>
                                     <div class="form-group">
-                                        <label >班级</label>
-                                        <select class="form-control" name="clazzno" size="1">
+                                        <label for="clazzno">班级</label>
+                                        <select class="form-control" name="clazzno" id="clazzno" size="1" aria-label="班级">
                                             <option value="">请选择</option>
                                             <option value="1001">软件一班</option>
                                             <option value="1002">软件二班</option>
@@ -80,7 +80,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <button class="btn btn-primary" type="submit">提交</button>
+                                        <button class="btn btn-primary" type="submit" aria-label="提交学生信息">提交</button>
                                     </div>
                                 </form>
 

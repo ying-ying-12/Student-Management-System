@@ -11,7 +11,7 @@ public class JdbcHelper {
     private static final String className = "com.mysql.cj.jdbc.Driver";
     private static final String url = "jdbc:mysql://localhost:3306/stu_manage?serverTimezone=GMT%2B8&characterEncoding=utf-8&allowPublicKeyRetrieval=true&useSSL=false";
     private static final String user = "root";
-    private static final String pass = "123456";// 自行修改密码
+    private static final String pass = "123456";
 
     public static void main(String[] args) throws SQLException {
         JdbcHelper helper = new JdbcHelper();

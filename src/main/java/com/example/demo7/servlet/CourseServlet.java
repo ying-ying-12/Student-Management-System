@@ -19,7 +19,12 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-
+//处理路径为/course的请求，主要实现：
+//
+//查询功能：支持分页查询课程信息，可按课程号、课程名、教师工号筛选
+//添加功能：教师可添加新课程
+//编辑功能：教师可修改自己创建的课程信息
+//删除功能：教师可删除自己创建的课程
 @WebServlet("/course")
 public class CourseServlet extends HttpServlet {
     CourseService courseService = new CourseService();

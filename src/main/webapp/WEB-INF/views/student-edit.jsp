@@ -4,8 +4,8 @@
 <html lang="zh">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
-    <title>编辑学生</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>修改学生</title>
     <link rel="icon" href="${pageContext.request.contextPath}/assets/favicon.ico" type="image/ico">
     <link href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/assets/css/materialdesignicons.min.css" rel="stylesheet">
@@ -31,47 +31,46 @@
                             <div class="card-body">
                                 <form id="myForm" action="${pageContext.request.contextPath}/student?r=edit" method="post">
                                     <div class="form-group">
-                                        <label >学号</label>
-                                        <input readonly value="${entity.sno}" class="form-control" type="text" name="sno">
+                                        <label for="sno">学号</label>
+                                        <input readonly value="${entity.sno}" class="form-control" type="text" name="sno" id="sno" aria-label="学号">
                                     </div>
                                     <div class="form-group">
-                                        <label >密码</label>
-                                        <input required value="${entity.password}" class="form-control" type="password" name="password">
+                                        <label for="password">密码</label>
+                                        <input required value="${entity.password}" class="form-control" type="password" name="password" id="password" aria-label="密码" autocomplete="new-password">
                                     </div>
                                     <div class="form-group">
-                                        <label >姓名</label>
-                                        <input required value="${entity.name}" class="form-control" type="text" name="name">
+                                        <label for="name">姓名</label>
+                                        <input required value="${entity.name}" class="form-control" type="text" name="name" id="name" aria-label="姓名">
                                     </div>
                                     <div class="form-group">
-                                        <label >电话</label>
-                                        <input class="form-control" value="${entity.tele}" type="text" name="tele">
+                                        <label for="tele">电话</label>
+                                        <input class="form-control" value="${entity.tele}" type="tel" name="tele" id="tele" aria-label="电话" pattern="[0-9]{11}">
                                     </div>
                                     <div class="form-group">
-                                        <label >入学日期</label>
+                                        <label for="enterdate">入学日期</label>
                                         <input value="${entity.enterdate}" class="form-control js-datepicker m-b-10" type="text"
-                                               name="enterdate" placeholder="yyyy-mm-dd" data-date-format="yyyy-mm-dd" />
+                                               name="enterdate" id="enterdate" placeholder="yyyy-mm-dd" data-date-format="yyyy-mm-dd" aria-label="入学日期" />
                                     </div>
                                     <div class="form-group">
-                                        <label >年龄</label>
-                                        <input value="${entity.age}"  class="form-control" type="number" name="age">
+                                        <label for="age">年龄</label>
+                                        <input value="${entity.age}" class="form-control" type="number" name="age" id="age" aria-label="年龄" min="1" max="100">
                                     </div>
                                     <div class="form-group">
-                                        <label >性别</label>
-                                        <select class="form-control" name="gender" size="1">
+                                        <label for="gender">性别</label>
+                                        <select class="form-control" name="gender" id="gender" size="1" aria-label="性别">
                                             <option value="">请选择</option>
                                             <option <c:if test="${entity.gender == 'm'}">selected</c:if> value="m">男</option>
                                             <option <c:if test="${entity.gender == 'w'}">selected</c:if> value="w">女</option>
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <label >详细地址</label>
-                                        <textarea class="form-control" name="address">${entity.address}</textarea>
+                                        <label for="address">详细地址</label>
+                                        <textarea class="form-control" name="address" id="address" aria-label="详细地址">${entity.address}</textarea>
                                     </div>
                                     <div class="form-group">
-                                        <label >班级</label>
-                                        <select class="form-control" name="clazzno" size="1">
+                                        <label for="clazzno">班级</label>
+                                        <select class="form-control" name="clazzno" id="clazzno" size="1" aria-label="班级">
                                             <option value="">请选择</option>
-
                                             <c:forEach items="${clazzes}" var="i" varStatus="s">
                                             <option <c:if test="${entity.clazzno == i.clazzno}">selected</c:if> value="${i.clazzno}">${i.clazzno} / ${i.name}</option>
                                             </c:forEach>
