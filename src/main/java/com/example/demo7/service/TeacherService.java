@@ -9,8 +9,9 @@ import java.util.List;
 
 public class TeacherService {
 
-    TeacherDao dao = new TeacherDao();// 创建数据访问对象实例，用于调用数据库操作方法
-    //新增
+    // 创建数据访问对象实例，用于调用数据库操作方法
+    TeacherDao dao = new TeacherDao();
+    //新增教师
     public String insert(Teacher teacher){
         // 验证信息是否为空
         if(teacher.getTno() == null || teacher.getTno().equals("")){
@@ -33,23 +34,23 @@ public class TeacherService {
         if(teacher.getTno() == null || teacher.getTno().equals("")){
             return "被修改的教师编号不可为空";
         }
+        //成功
         dao.update(teacher);
-        return null;//成功
+        return null;
     }
 
     public Teacher getByTno(String tno){
-
         return dao.getByTno(tno);
     }
 
     public int count(){
-
+        // 直接调用DAO层方法统计并返回总数
         return dao.count();// 直接调用DAO层方法统计并返回总数
     }
 
     public PagerVO<Teacher> page(int current,int size,String tno,String tname){
         String whereSql = " where 1=1 ";
-        //拼接
+        //根据教师编号和教师名查询
         if(tno!=null && !"".equals(tno)){
             whereSql += " and tno like '%" + tno + "%'";
         }

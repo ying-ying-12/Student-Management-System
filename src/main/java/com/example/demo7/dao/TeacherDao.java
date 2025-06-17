@@ -12,19 +12,21 @@ import java.util.List;
 
 public class TeacherDao {
 
+    //封页查询功能
     public PagerVO<Teacher> page(int current,int size,String whereSql){
         PagerVO<Teacher> pagerVO = new PagerVO<>();
         pagerVO.setCurrent(current);
         pagerVO.setSize(size);
         JdbcHelper helper = new JdbcHelper();
+        //查询教师数量
         ResultSet resultSet = helper.executeQuery("select count(1) from tb_teacher " + whereSql);
         try {
             resultSet.next();
             int total = resultSet.getInt(1);
             pagerVO.setTotal(total);
-            // select * from  tb_teacher where  limit 10,10
-            resultSet = helper.executeQuery("select * from tb_teacher "
+                        resultSet = helper.executeQuery("select * from tb_teacher "
                     + whereSql + "limit " + ((current-1)*size)+ ","+size);
+            //分页
             List<Teacher> list = new ArrayList<>();
             while (resultSet.next()){
                 Teacher teacher = toEntity(resultSet);
@@ -40,6 +42,7 @@ public class TeacherDao {
         return pagerVO;
     }
 
+    //管理员插入教师
     public int insert(Teacher teacher){
         JdbcHelper helper = new JdbcHelper();
         int res = helper.excuteUpdate("insert into tb_teacher values(?,?,?)",
@@ -48,11 +51,7 @@ public class TeacherDao {
         return res;
     }
 
-    /**
-     * Teacher 里面有属性为null的话，就忽视，不是null的话，就加入更新的sql语句，进行更新
-     * @param teacher
-     * @return
-     */
+    //更新
     public int update(Teacher teacher){
         JdbcHelper helper = new JdbcHelper();
         int res = 0;
@@ -66,7 +65,6 @@ public class TeacherDao {
             sql += "tname = ?,";
             params.add(teacher.getTname());
         }
-
         sql = sql.substring(0,sql.length() - 1);
         sql += " where tno = '"+teacher.getTno() + "'";
         System.out.println(sql);
@@ -75,6 +73,7 @@ public class TeacherDao {
         return res;
     }
 
+    //删除
     public int delete(String tno){
         JdbcHelper helper = new JdbcHelper();
         int res = helper.excuteUpdate("delete from tb_teacher where tno = ?",tno);
@@ -82,6 +81,7 @@ public class TeacherDao {
         return res;
     }
 
+    //计数
     public int count(String whereSql){
         if(whereSql == null){
             whereSql = "";
@@ -99,6 +99,7 @@ public class TeacherDao {
         return 0;
     }
 
+    //计数
     public int count(){
         return count("");
     }
