@@ -1,6 +1,5 @@
 package com.example.demo7.servlet;
 
-
 import com.example.demo7.entity.Clazz;
 import com.example.demo7.entity.Student;
 import com.example.demo7.service.ClazzService;
@@ -19,132 +18,202 @@ import java.text.ParseException;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * 学生信息管理Servlet
+ * 处理学生的增删改查请求，支持分页查询和条件筛选
+ * 权限控制：仅管理员可进行增删改操作
+ */
 @WebServlet("/student")
 public class StudentServlet extends HttpServlet {
-    StudentService studentService = new StudentService();
-    ClazzService clazzService = new ClazzService();
+    // 业务逻辑层对象：处理学生相关业务
+    private final StudentService studentService = new StudentService();
+    // 业务逻辑层对象：处理班级相关业务（用于获取班级列表）
+    private final ClazzService clazzService = new ClazzService();
+
+    /**
+     * 处理HTTP GET请求
+     * 支持学生列表展示、新增学生页面跳转、编辑学生页面跳转
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        // 设置请求编码，确保中文参数能正确解析
         req.setCharacterEncoding("utf-8");
-        //查询参数
+
+        // 获取请求类型参数（r参数决定具体操作）
         String r = req.getParameter("r");
-        if(r == null){
+
+        // 1. 默认处理学生列表请求
+        if (r == null) {
+            // 获取分页参数（当前页码，默认为第1页）
             String current = req.getParameter("current");
-            if(current==null){
+            if (current == null) {
                 current = "1";
             }
-            String sno = req.getParameter("sno");
-            String gender = req.getParameter("gender");
-            String clazzno = req.getParameter("clazzno");
-            String name = req.getParameter("name");
 
-            PagerVO<Student> pagerVO = studentService.page(Integer.parseInt(current),10,sno,name,gender,clazzno);
+            // 获取查询条件参数
+            String sno = req.getParameter("sno");       // 学号
+            String gender = req.getParameter("gender"); // 性别
+            String clazzno = req.getParameter("clazzno"); // 班级编号
+            String name = req.getParameter("name");     // 姓名
+
+            // 调用Service层进行分页查询
+            PagerVO<Student> pagerVO = studentService.page(
+                    Integer.parseInt(current), 10, sno, name, gender, clazzno
+            );
+            // 初始化分页信息（计算总页数、页码范围等）
             pagerVO.init();
 
+            // 获取所有班级信息，用于显示学生所在班级名称
             List<Clazz> clazzes = clazzService.listAll();
-            HashMap<String,Clazz> clazzmap =  new HashMap<>();
+            // 构建班级编号到班级对象的映射，方便快速查找
+            HashMap<String, Clazz> clazzMap = new HashMap<>();
             for (Clazz clazz : clazzes) {
-                clazzmap.put(clazz.getClazzno(),clazz);
+                clazzMap.put(clazz.getClazzno(), clazz);
             }
+
+            // 为每个学生设置对应的班级对象
             for (Student student : pagerVO.getList()) {
-                student.setClazz(clazzmap.get( student.getClazzno() ));
+                student.setClazz(clazzMap.get(student.getClazzno()));
             }
 
-            req.setAttribute("sno",sno);
-            req.setAttribute("gender",gender);
-            req.setAttribute("clazzno",clazzno);
-            req.setAttribute("name",name);
-            req.setAttribute("pagerVO",pagerVO);
-            req.getRequestDispatcher("/WEB-INF/views/student-list.jsp").forward(req,resp);
+            // 将查询条件和分页结果存入请求属性，传递给JSP页面
+            req.setAttribute("sno", sno);
+            req.setAttribute("gender", gender);
+            req.setAttribute("clazzno", clazzno);
+            req.setAttribute("name", name);
+            req.setAttribute("pagerVO", pagerVO);
+
+            // 转发到学生列表页面
+            req.getRequestDispatcher("/WEB-INF/views/student-list.jsp").forward(req, resp);
         }
 
-        if("add".equals(r)){
-            boolean hasPermission = MyUtils.hasPermission(req,resp,false,"admin");
-            if(!hasPermission){
+        // 2. 处理新增学生页面请求
+        if ("add".equals(r)) {
+            // 验证用户权限（必须是管理员）
+            boolean hasPermission = MyUtils.hasPermission(req, resp, false, "admin");
+            if (!hasPermission) {
                 return;
             }
-            //查询所有班级
+
+            // 查询所有班级信息，用于新增表单中的班级下拉选择
             List<Clazz> clazzes = clazzService.listAll();
-            req.setAttribute("clazzes",clazzes);
-            req.getRequestDispatcher("/WEB-INF/views/student-add.jsp").forward(req,resp);
+            req.setAttribute("clazzes", clazzes);
+
+            // 转发到新增学生页面
+            req.getRequestDispatcher("/WEB-INF/views/student-add.jsp").forward(req, resp);
         }
-        if("edit".equals(r)){
-            boolean hasPermission = MyUtils.hasPermission(req,resp,false,"admin");
-            if(!hasPermission){
+
+        // 3. 处理编辑学生页面请求
+        if ("edit".equals(r)) {
+            // 验证用户权限（必须是管理员）
+            boolean hasPermission = MyUtils.hasPermission(req, resp, false, "admin");
+            if (!hasPermission) {
                 return;
             }
+
+            // 查询所有班级信息，用于编辑表单中的班级下拉选择
             List<Clazz> clazzes = clazzService.listAll();
-            req.setAttribute("clazzes",clazzes);
+            req.setAttribute("clazzes", clazzes);
+
+            // 获取要编辑的学生学号，并查询学生信息
             String sno = req.getParameter("sno");
             Student student = studentService.getBySno(sno);
-            req.setAttribute("entity",student);
-            req.getRequestDispatcher("/WEB-INF/views/student-edit.jsp").forward(req,resp);
-        }
+            req.setAttribute("entity", student);
 
+            // 转发到编辑学生页面
+            req.getRequestDispatcher("/WEB-INF/views/student-edit.jsp").forward(req, resp);
+        }
     }
 
+    /**
+     * 处理HTTP POST请求
+     * 支持学生信息的新增、修改和删除操作
+     */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //新增 修改 删除
-        req.setCharacterEncoding("utf-8");// 设置编码，否则从前端获取参数乱码
+        // 设置请求和响应编码，确保中文正常处理
+        req.setCharacterEncoding("utf-8");
         resp.setContentType("application/json; charset=utf-8");
 
+        // 获取请求类型参数
         String r = req.getParameter("r");
-        if("add".equals(r) || "edit".equals(r)) {
-            boolean hasPermission = MyUtils.hasPermission(req,resp,true,"admin");
-            if(!hasPermission){
+
+        // 1. 处理新增或编辑学生请求
+        if ("add".equals(r) || "edit".equals(r)) {
+            // 验证用户权限（必须是管理员）
+            boolean hasPermission = MyUtils.hasPermission(req, resp, true, "admin");
+            if (!hasPermission) {
                 return;
             }
+
+            // 从请求参数构建学生对象
             Student student = new Student();
-            student.setSno(req.getParameter("sno"));
-            student.setPassword(req.getParameter("password"));
-            student.setName(req.getParameter("name"));
-            student.setTele(req.getParameter("tele"));
-            student.setGender(req.getParameter("gender"));
-            student.setAddress(req.getParameter("address"));
-            student.setClazzno(req.getParameter("clazzno"));
+            student.setSno(req.getParameter("sno"));         // 学号
+            student.setPassword(req.getParameter("password")); // 密码
+            student.setName(req.getParameter("name"));       // 姓名
+            student.setTele(req.getParameter("tele"));       // 电话
+            student.setGender(req.getParameter("gender"));   // 性别
+            student.setAddress(req.getParameter("address")); // 地址
+            student.setClazzno(req.getParameter("clazzno")); // 班级编号
+
+            // 处理入学日期（字符串转日期）
             String enterdate = req.getParameter("enterdate");
             try {
                 student.setEnterdate(MyUtils.strToDate(enterdate));
             } catch (ParseException e) {
-                throw new RuntimeException(e);
+                throw new RuntimeException("日期格式转换失败", e);
             }
+
+            // 处理年龄参数
             String age = req.getParameter("age");
             student.setAge(Integer.parseInt(age));
 
-            if("add".equals(r)){
-
+            // 执行新增操作
+            if ("add".equals(r)) {
                 String msg = studentService.insert(student);
-                if(msg!=null){
-                    resp.getWriter().write(ApiResult.json(false,msg));
+                if (msg != null) {
+                    // 返回错误信息（如学号已存在）
+                    resp.getWriter().write(ApiResult.json(false, msg));
                     return;
-                }else{
-                    resp.getWriter().write(ApiResult.json(true,"保存学生成功！"));
-                    return;
-                }
-            }else{
-                String msg = studentService.update(student);
-                if(msg!=null){
-                    resp.getWriter().write(ApiResult.json(false,msg));
-                    return;
-                }else{
-                    resp.getWriter().write(ApiResult.json(true,"更新学生成功！"));
+                } else {
+                    // 返回成功信息
+                    resp.getWriter().write(ApiResult.json(true, "保存学生成功！"));
                     return;
                 }
             }
-        }else{
-            boolean hasPermission = MyUtils.hasPermission(req,resp,true,"admin");
-            if(!hasPermission){
+            // 执行编辑操作
+            else {
+                String msg = studentService.update(student);
+                if (msg != null) {
+                    // 返回错误信息
+                    resp.getWriter().write(ApiResult.json(false, msg));
+                    return;
+                } else {
+                    // 返回成功信息
+                    resp.getWriter().write(ApiResult.json(true, "更新学生成功！"));
+                    return;
+                }
+            }
+        }
+        // 2. 处理删除学生请求
+        else {
+            // 验证用户权限（必须是管理员）
+            boolean hasPermission = MyUtils.hasPermission(req, resp, true, "admin");
+            if (!hasPermission) {
                 return;
             }
-            //删除
+
+            // 获取要删除的学生学号
             String sno = req.getParameter("sno");
             int res = studentService.delete(sno);
-            if(res == 0){
-                resp.getWriter().write(ApiResult.json(false,"删除失败，请联系管理员！"));
+
+            if (res == 0) {
+                // 返回删除失败信息
+                resp.getWriter().write(ApiResult.json(false, "删除失败，请联系管理员！"));
                 return;
-            }else{
-                resp.getWriter().write(ApiResult.json(true,"删除成功！"));
+            } else {
+                // 返回删除成功信息
+                resp.getWriter().write(ApiResult.json(true, "删除成功！"));
                 return;
             }
         }
