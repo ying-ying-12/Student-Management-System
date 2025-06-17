@@ -119,6 +119,7 @@ public class StudentDao {
         return 0;
     }
 
+    //学生统计
     public int count(){
         return count("");
     }

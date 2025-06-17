@@ -1,5 +1,5 @@
 package com.example.demo7.dao;
-
+//数据访问对象，访问数据库相关的内容
 import com.example.demo7.entity.Admin;
 import com.example.demo7.utils.JdbcHelper;
 
