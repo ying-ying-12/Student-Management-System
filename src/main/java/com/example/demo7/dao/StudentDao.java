@@ -9,20 +9,31 @@ import com.example.demo7.entity.Student;
 import com.example.demo7.utils.JdbcHelper;
 import com.example.demo7.utils.PagerVO;
 
+/**
+ * 学生数据访问对象
+ * 负责与数据库中的学生表进行交互，实现学生信息的增删改查操作
+ */
 public class StudentDao {
 
+    /**
+     * 分页查询学生信息
+     *
+     * @param current 当前页码
+     * @param size 每页显示记录数
+     * @param whereSql 查询条件SQL子句
+     * @return 包含分页信息和学生列表的PagerVO对象
+     */
     public PagerVO<Student> page(int current, int size, String whereSql) {
         // 创建分页对象并设置当前页和每页大小
         PagerVO<Student> pagerVO = new PagerVO<>();
-        //返回数据
         pagerVO.setCurrent(current);
         pagerVO.setSize(size);
-        //查询记录
+
         // 创建 JdbcHelper 实例，用于执行 SQL 查询
         JdbcHelper helper = new JdbcHelper();
-        // 查询符合条件的记录总数
-        ResultSet resultSet = helper.executeQuery("select count(1) from tb_student " + whereSql);
         try {
+            // 查询符合条件的记录总数
+            ResultSet resultSet = helper.executeQuery("select count(1) from tb_student " + whereSql);
             resultSet.next();
             int total = resultSet.getInt(1);
             // 设置总记录数
@@ -30,7 +41,7 @@ public class StudentDao {
 
             // 查询当前页的学生记录
             resultSet = helper.executeQuery("select * from tb_student "
-                    + whereSql + "limit " + ((current - 1) * size) + "," + size);
+                    + whereSql + " limit " + ((current - 1) * size) + "," + size);
             List<Student> list = new ArrayList<>();
             while (resultSet.next()) {
                 Student student = toEntity(resultSet);
@@ -41,16 +52,22 @@ public class StudentDao {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            // 关闭数据库连接
+            // 关闭数据库连接，释放资源
             helper.closeDB();
         }
         return pagerVO;
     }
 
+    /**
+     * 插入新的学生记录
+     *
+     * @param student 学生实体对象
+     * @return 受影响的行数，1表示成功，0表示失败
+     */
     public int insert(Student student) {
         // 创建 JdbcHelper 实例，用于执行 SQL 插入操作
         JdbcHelper helper = new JdbcHelper();
-        // 执行插入操作
+        // 执行插入操作，使用占位符防止SQL注入
         int res = helper.excuteUpdate("insert into tb_student values(?,?,?,?,?,?,?,?,?)",
                 student.getSno(), student.getPassword(), student.getName(),
                 student.getTele(), student.getEnterdate(), student.getAge(),
@@ -60,12 +77,19 @@ public class StudentDao {
         return res;
     }
 
-    // 动态构建SQL语句，只更新非空字段
+    /**
+     * 更新学生信息，只更新非空字段
+     *
+     * @param student 学生实体对象，包含要更新的字段
+     * @return 受影响的行数，1表示成功，0表示失败
+     */
     public int update(Student student) {
         JdbcHelper helper = new JdbcHelper();
         int res = 0;
         String sql = "update tb_student set ";
         List<Object> params = new ArrayList<>();
+
+        // 动态构建SQL语句，只添加非空字段的更新
         if (student.getPassword() != null) {
             sql += "password = ?,";
             params.add(student.getPassword());
@@ -98,16 +122,24 @@ public class StudentDao {
             sql += "clazzno = ?,";
             params.add(student.getClazzno());
         }
-        // 移除最后一个逗号并添加条件子句
-        sql = sql.substring(0, sql.length() - 1);
+
+        // 移除最后一个逗号，并添加查询条件
+        if (sql.endsWith(",")) {
+            sql = sql.substring(0, sql.length() - 1);
+        }
         sql += " where sno = '" + student.getSno() + "'";
-        System.out.println(sql);
+        System.out.println(sql); // 打印SQL语句，用于调试
         res = helper.excuteUpdate(sql, params.toArray());
         helper.closeDB();
         return res;
     }
 
-    //删除功能
+    /**
+     * 删除学生记录
+     *
+     * @param sno 要删除的学生学号
+     * @return 受影响的行数，1表示成功，0表示失败
+     */
     public int delete(String sno) {
         JdbcHelper helper = new JdbcHelper();
         int res = helper.excuteUpdate("delete from tb_student where sno = ?", sno);
@@ -115,6 +147,12 @@ public class StudentDao {
         return res;
     }
 
+    /**
+     * 统计学生数量（带查询条件）
+     *
+     * @param whereSql 查询条件SQL子句
+     * @return 学生数量
+     */
     public int count(String whereSql) {
         if (whereSql == null) {
             whereSql = "";
@@ -132,11 +170,21 @@ public class StudentDao {
         return 0;
     }
 
-    //学生统计
+    /**
+     * 统计所有学生数量
+     *
+     * @return 学生总数
+     */
     public int count() {
         return count("");
     }
 
+    /**
+     * 根据学号查询学生信息
+     *
+     * @param sno 学生学号
+     * @return 学生实体对象，若不存在则返回null
+     */
     public Student getBySno(String sno) {
         JdbcHelper helper = new JdbcHelper();
         ResultSet resultSet = helper.executeQuery("select * from tb_student where sno = ?", sno);
@@ -151,11 +199,17 @@ public class StudentDao {
         }
         return null;
     }
-//将数据库结果集转换为学生实体对象
 
+    /**
+     * 将数据库结果集转换为学生实体对象
+     *
+     * @param resultSet 数据库查询结果集
+     * @return 学生实体对象
+     * @throws SQLException SQL操作异常
+     */
     public Student toEntity(ResultSet resultSet) throws SQLException {
         Student student = new Student();
-        // 设置学生属性
+        // 从结果集中获取数据并设置到学生实体对象中
         student.setSno(resultSet.getString("sno"));
         student.setPassword(resultSet.getString("password"));
         student.setName(resultSet.getString("name"));
@@ -167,5 +221,4 @@ public class StudentDao {
         student.setClazzno(resultSet.getString("clazzno"));
         return student;
     }
-
 }
