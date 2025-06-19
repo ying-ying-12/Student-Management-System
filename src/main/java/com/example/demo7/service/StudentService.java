@@ -15,8 +15,8 @@ public class StudentService {
 
     /**
      * 新增学生
-     * @param student 学生实体对象
-     * @return 错误信息（若新增失败），null（若新增成功）
+     * 学生实体对象
+     *错误信息（若新增失败），null（若新增成功）
      */
     public String insert(Student student) {
         // 验证学生基本信息非空
@@ -46,8 +46,8 @@ public class StudentService {
 
     /**
      * 更新学生信息
-     * @param student 学生实体对象（包含要更新的信息）
-     * @return 错误信息（若更新失败），null（若更新成功）
+     *  student 学生实体对象（包含要更新的信息）
+     * 错误信息（若更新失败），null（若更新成功）
      */
     public String update(Student student) {
         // 验证学号非空（学号是更新的关键条件）
@@ -62,8 +62,8 @@ public class StudentService {
 
     /**
      * 根据学号查询学生信息
-     * @param sno 学生学号
-     * @return 学生实体对象（若存在），null（若不存在）
+     * 学生学号
+     * 学生实体对象（若存在），null（若不存在）
      */
     public Student getBySno(String sno) {
         return dao.getBySno(sno);
@@ -71,22 +71,13 @@ public class StudentService {
 
     /**
      * 获取学生总数
-     * @return 学生记录总数
+     * 学生记录总数
      */
     public int count() {
         return dao.count();
     }
 
-    /**
-     * 分页查询学生信息
-     * @param current 当前页码
-     * @param size 每页记录数
-     * @param sno 学号查询条件（可选）
-     * @param name 姓名查询条件（可选）
-     * @param gender 性别查询条件（可选）
-     * @param clazzno 班级编号查询条件（可选）
-     * @return 包含分页信息和学生列表的PagerVO对象
-     */
+
     public PagerVO<Student> page(int current, int size, String sno, String name, String gender, String clazzno) {
         // 初始化查询条件SQL（默认查询所有记录）
         String whereSql = " where 1=1 ";
@@ -111,8 +102,8 @@ public class StudentService {
 
     /**
      * 删除学生信息
-     * @param sno 要删除的学生学号
-     * @return 受影响的行数（1表示成功，0表示失败）
+     *要删除的学生学号
+     * 受影响的行数（1表示成功，0表示失败）
      */
     public int delete(String sno) {
         return dao.delete(sno);

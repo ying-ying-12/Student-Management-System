@@ -17,11 +17,6 @@ public class StudentDao {
 
     /**
      * 分页查询学生信息
-     *
-     * @param current 当前页码
-     * @param size 每页显示记录数
-     * @param whereSql 查询条件SQL子句
-     * @return 包含分页信息和学生列表的PagerVO对象
      */
     public PagerVO<Student> page(int current, int size, String whereSql) {
         // 创建分页对象并设置当前页和每页大小
@@ -58,12 +53,7 @@ public class StudentDao {
         return pagerVO;
     }
 
-    /**
-     * 插入新的学生记录
-     *
-     * @param student 学生实体对象
-     * @return 受影响的行数，1表示成功，0表示失败
-     */
+    //插入新的学生记录
     public int insert(Student student) {
         // 创建 JdbcHelper 实例，用于执行 SQL 插入操作
         JdbcHelper helper = new JdbcHelper();
@@ -77,12 +67,7 @@ public class StudentDao {
         return res;
     }
 
-    /**
-     * 更新学生信息，只更新非空字段
-     *
-     * @param student 学生实体对象，包含要更新的字段
-     * @return 受影响的行数，1表示成功，0表示失败
-     */
+    //更新学生信息，只更新非空字段
     public int update(Student student) {
         JdbcHelper helper = new JdbcHelper();
         int res = 0;
@@ -136,9 +121,6 @@ public class StudentDao {
 
     /**
      * 删除学生记录
-     *
-     * @param sno 要删除的学生学号
-     * @return 受影响的行数，1表示成功，0表示失败
      */
     public int delete(String sno) {
         JdbcHelper helper = new JdbcHelper();
@@ -149,9 +131,6 @@ public class StudentDao {
 
     /**
      * 统计学生数量（带查询条件）
-     *
-     * @param whereSql 查询条件SQL子句
-     * @return 学生数量
      */
     public int count(String whereSql) {
         if (whereSql == null) {
@@ -172,19 +151,12 @@ public class StudentDao {
 
     /**
      * 统计所有学生数量
-     *
-     * @return 学生总数
      */
     public int count() {
         return count("");
     }
 
-    /**
-     * 根据学号查询学生信息
-     *
-     * @param sno 学生学号
-     * @return 学生实体对象，若不存在则返回null
-     */
+    //根据学号查询学生信息
     public Student getBySno(String sno) {
         JdbcHelper helper = new JdbcHelper();
         ResultSet resultSet = helper.executeQuery("select * from tb_student where sno = ?", sno);
@@ -200,13 +172,7 @@ public class StudentDao {
         return null;
     }
 
-    /**
-     * 将数据库结果集转换为学生实体对象
-     *
-     * @param resultSet 数据库查询结果集
-     * @return 学生实体对象
-     * @throws SQLException SQL操作异常
-     */
+     //将数据库结果集转换为学生实体对象
     public Student toEntity(ResultSet resultSet) throws SQLException {
         Student student = new Student();
         // 从结果集中获取数据并设置到学生实体对象中

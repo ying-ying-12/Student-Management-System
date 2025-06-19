@@ -63,12 +63,7 @@ public class JdbcHelper {
         }
     }
 
-    /**
-     * 执行SQL查询语句（SELECT）
-     * @param sql SQL查询语句（支持占位符?）
-     * @param params 占位符对应的参数值
-     * @return 结果集对象（ResultSet）
-     */
+    //执行SQL查询语句（SELECT）
     public ResultSet executeQuery(String sql, Object... params) {
         try {
             pstmt = conn.prepareStatement(sql);  // 预编译SQL语句
@@ -85,12 +80,7 @@ public class JdbcHelper {
         return rs;
     }
 
-    /**
-     * 执行SQL更新语句（INSERT/UPDATE/DELETE）
-     * @param sql SQL更新语句（支持占位符?）
-     * @param params 占位符对应的参数值
-     * @return 受影响的行数
-     */
+    //执行SQL更新语句（INSERT/UPDATE/DELETE）
     public int excuteUpdate(String sql, Object... params) {
         int row = -1;
         try {
