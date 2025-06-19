@@ -9,13 +9,13 @@ import com.example.demo7.entity.Student;
 import com.example.demo7.utils.JdbcHelper;
 import com.example.demo7.utils.PagerVO;
 
-/**
+/*
  * 学生数据访问对象
  * 负责与数据库中的学生表进行交互，实现学生信息的增删改查操作
  */
 public class StudentDao {
 
-    /**
+    /*
      * 分页查询学生信息
      */
     public PagerVO<Student> page(int current, int size, String whereSql) {
@@ -119,7 +119,7 @@ public class StudentDao {
         return res;
     }
 
-    /**
+    /*
      * 删除学生记录
      */
     public int delete(String sno) {
@@ -129,7 +129,7 @@ public class StudentDao {
         return res;
     }
 
-    /**
+    /*
      * 统计学生数量（带查询条件）
      */
     public int count(String whereSql) {
@@ -149,7 +149,7 @@ public class StudentDao {
         return 0;
     }
 
-    /**
+    /*
      * 统计所有学生数量
      */
     public int count() {

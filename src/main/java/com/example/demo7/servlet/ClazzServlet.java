@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/**
+/*
  * 班级信息管理Servlet
  * 处理班级的增删改查请求，支持分页查询和条件筛选
  * 权限控制：仅管理员可进行所有操作
@@ -23,7 +23,7 @@ public class ClazzServlet extends HttpServlet {
     // 业务逻辑层对象：处理班级相关业务
     private final ClazzService clazzService = new ClazzService();
 
-    /**
+    /*
      * 处理HTTP GET请求
      * 支持班级列表展示、新增班级页面跳转、编辑班级页面跳转
      */
@@ -93,7 +93,7 @@ public class ClazzServlet extends HttpServlet {
         }
     }
 
-    /**
+    /*
      * 处理HTTP POST请求
      * 支持班级信息的新增、修改和删除操作
      */

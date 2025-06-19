@@ -4,7 +4,7 @@ import com.example.demo7.dao.StudentDao;
 import com.example.demo7.entity.Student;
 import com.example.demo7.utils.PagerVO;
 
-/**
+/*
  * 学生业务逻辑服务类
  * 处理学生信息的增删改查业务逻辑，包含数据验证和业务规则
  */
@@ -13,7 +13,7 @@ public class StudentService {
     // 数据访问对象：处理学生数据的数据库操作
     private final StudentDao dao = new StudentDao();
 
-    /**
+    /*
      * 新增学生
      * 学生实体对象
      *错误信息（若新增失败），null（若新增成功）
@@ -44,7 +44,7 @@ public class StudentService {
         return null;
     }
 
-    /**
+    /*
      * 更新学生信息
      *  student 学生实体对象（包含要更新的信息）
      * 错误信息（若更新失败），null（若更新成功）
@@ -60,7 +60,7 @@ public class StudentService {
         return null;
     }
 
-    /**
+    /*
      * 根据学号查询学生信息
      * 学生学号
      * 学生实体对象（若存在），null（若不存在）
@@ -69,7 +69,7 @@ public class StudentService {
         return dao.getBySno(sno);
     }
 
-    /**
+    /*
      * 获取学生总数
      * 学生记录总数
      */
@@ -100,7 +100,7 @@ public class StudentService {
         return dao.page(current, size, whereSql);
     }
 
-    /**
+    /*
      * 删除学生信息
      *要删除的学生学号
      * 受影响的行数（1表示成功，0表示失败）
